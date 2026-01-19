@@ -1,0 +1,246 @@
+﻿@{
+    ViewData["Title"] = "ConsoLocate - LCUP Campus Navigation";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="~/images/lcuplogo.png" type="image/x-icon">
+</head>
+<body>
+    <div class="screen active" id="welcomeScreen">
+        <div class="welcome-container">
+            <div class="welcome-bg-pattern" style="background-image: url('~/images/background.png');"></div>
+            <div class="welcome-content">
+                <div class="university-logo">
+                    <img src="~/images/lcuplogo.png" alt="LCUP Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="logo-placeholder">
+                        <div class="logo-circle">
+                            <div class="logo-symbol">🎓</div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="main-title">ConsoLocate</h1>
+                <h2 class="subtitle"></h2>
+                <p class="tagline">La Consolacion University Philippines<br>Malolos, Bulacan</p>
+                <p class="motto">"Unitas • Caritas • Veritas"</p>
+
+                <div class="welcome-actions">
+                    <button class="primary-btn" onclick="showScreen('dashboard')">
+                        <span class="btn-icon"></span>Start Navigation
+                    </button>
+                    <button class="secondary-btn" onclick="showAbout()">
+                        <span class="btn-icon">ℹ</span>
+                        About LCUP
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div class="screen" id="dashboardScreen">
+        <div class="app-header">
+            <div class="header-left">
+                <div class="logo-mini">
+                    <img src="~/images/lcuplogo.png" alt="ConsoLocate Logo">
+                </div>
+                <div class="header-title">
+                    <h3>ConsoLocate</h3>
+                    <span class="header-subtitle">LCUP Navigation</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <h2 class="page-title">Dashboard</h2>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-hero">
+                <div class="hero-card" onclick="showScreen('map')">
+                    <div class="hero-icon">🗺️</div>
+                    <div class="hero-content">
+                        <h3>Explore Campus Map</h3>
+                        <p>Navigate through LCUP's interactive 2D digital map with LED path guidance</p>
+                        <button class="hero-btn">Start Exploring →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" onclick="showScreen('search')">
+                    <div class="service-icon blue"><span>🏢</span></div>
+                    <h4>Find Buildings</h4>
+                    <p>Search for buildings, offices, and classrooms</p>
+                </div>
+                <div class="service-card" onclick="showScreen('directory')">
+                    <div class="service-icon purple"><span>🎓</span></div>
+                    <h4>Academic Programs</h4>
+                    <p>Browse colleges, departments, and courses</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon green"><span>📋</span></div>
+                    <h4>Student Services</h4>
+                    <p>Registrar, admissions, and student affairs</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon orange"><span>🏛️</span></div>
+                    <h4>Campus Facilities</h4>
+                    <p>Libraries, laboratories, and recreational areas</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon red"><span>🏥</span></div>
+                    <h4>Support Services</h4>
+                    <p>Health center, counseling, and security</p>
+                </div>
+                <div class="service-card" onclick="showScreen('faqs')">
+                    <div class="service-icon teal"><span>❓</span></div>
+                    <h4>Help & FAQs</h4>
+                    <p>Get assistance and find answers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Screen -->
+    <div class="screen" id="mapScreen">
+        <div class="app-header">
+            <div class="header-left">
+                <button class="back-button" onclick="showScreen('dashboard')"><span>←</span> Back</button>
+            </div>
+            <div class="header-center">
+                <h2 class="page-title">Campus Map</h2>
+            </div>
+        </div>
+        <div style="height: calc(100vh - 85px); padding:10px; width: 100%;">
+            <div id="campusMap"></div>
+        </div>
+    </div>
+
+    <!-- Search Screen -->
+    <div class="screen" id="searchScreen">
+        <div class="app-header">
+            <div class="header-left">
+                <button class="back-button" onclick="showScreen('dashboard')"><span>←</span> Back</button>
+            </div>
+            <div class="header-center">
+                <h2 class="page-title">Find a Location</h2>
+            </div>
+            <div class="header-right">
+                <button class="header-btn"><span>🔔</span></button>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-field" id="locationSearch" placeholder="Search buildings, offices, rooms..." oninput="filterLocations()">
+                <button class="search-clear" onclick="clearSearch()">✕</button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <button class="filter-chip active" onclick="filterByTab('all', event)">
+                <span>📋</span> All Locations
+            </button>
+            <button class="filter-chip" onclick="filterByTab('admin', event)">
+                <span>🏛️</span> Administration
+            </button>
+            <button class="filter-chip" onclick="filterByTab('services', event)">
+                <span>🎯</span> Student Services
+            </button>
+            <button class="filter-chip" onclick="filterByTab('facilities', event)">
+                <span>🏢</span> Facilities
+            </button>
+            <button class="filter-chip" onclick="filterByTab('support', event)">
+                <span>💡</span> Support
+            </button>
+        </div>
+
+
+    <!-- Directory Screen -->
+    <div class="screen" id="directoryScreen">
+        <div class="app-header">
+            <div class="header-left">
+                <button class="back-button" onclick="showScreen('dashboard')"><span>←</span> Back</button>
+            </div>
+            <div class="header-center">
+                <h2 class="page-title">Academic Directory</h2>
+            </div>
+            <div class="header-right">
+                <button class="header-btn"><span>🔍</span></button>
+            </div>
+        </div>
+
+        <div class="directory-section">
+            <div class="section-header">
+                <h3>Colleges & Programs</h3>
+                <p>Explore our academic offerings</p>
+            </div>
+            <div class="colleges-container">
+                <div class="college-item" onclick="toggleCollege(this)">
+                    <div class="college-badge pink"><span class="college-num">1</span></div>
+                    <div class="college-details">
+                        <h4>College of Nursing</h4>
+                        <p class="college-location">📍 Nursing Building, 2nd Floor</p>
+                        <div class="college-expand">
+                            <p class="college-programs">Programs: Bachelor of Science in Nursing (BSN), Master of Arts in Nursing (MAN)</p>
+                            <p class="college-dean">Dean: Dr. Maria Santos</p>
+                        </div>
+                    </div>
+                    <button class="expand-icon">▼</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQs Screen -->
+    <div class="screen" id="faqsScreen">
+        <div class="app-header">
+            <div class="header-left">
+                <button class="back-button" onclick="showScreen('dashboard')"><span>←</span> Back</button>
+            </div>
+            <div class="header-center">
+                <h2 class="page-title">Help & Support</h2>
+            </div>
+        </div>
+        <div class="help-container">
+            <div class="help-intro">
+                <h3>How can we help you?</h3>
+                <p>Find answers to frequently asked questions</p>
+            </div>
+            <div class="help-quick-actions">
+                <button class="quick-action-card"><span class="qa-icon">💬</span><span>Live Chat</span></button>
+                <button class="quick-action-card"><span class="qa-icon">📞</span><span>Call Support</span></button>
+                <button class="quick-action-card"><span class="qa-icon">📧</span><span>Email Us</span></button>
+            </div>
+            <div class="faq-container">
+                <h4 class="faq-title">Frequently Asked Questions</h4>
+                <div class="faq-card" onclick="toggleFaq(this)">
+                    <div class="faq-header">
+                        <span class="faq-q">Where is Room 201 located?</span>
+                        <span class="faq-arrow">▼</span>
+                    </div>
+                    <div class="faq-body">
+                        <p>Room 201 is located on the second floor of the Main Building.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="fab" onclick="showScreen('welcome')" id="fabButton"><span>←</span></button>
+
+    <script src="~/js/script.js"></script>
+</body>
+</html>

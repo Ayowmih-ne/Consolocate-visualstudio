@@ -2,47 +2,58 @@
 // CONSOLOCATE Campus Navigation Script
 // ==========================
 
-// Campus Locations Database
-const locations = [
-    { id: 1, name: "Main Administration Building", description: "President's Office, Board Room, Executive Offices", category: "admin", floor: "All Floors", contact: "(044) 791-0883" },
-    { id: 2, name: "Registrar's Office", description: "Enrollment, transcripts, academic records", category: "admin", floor: "Ground Floor, Admin Bldg", contact: "registrar@lcup.edu.ph" },
-    { id: 3, name: "College of Nursing Building", description: "Nursing Department, Skills Lab, Faculty Offices", category: "all", floor: "1st-3rd Floor", contact: "nursing@lcup.edu.ph" },
-    { id: 4, name: "IT Building", description: "Computer Studies, Computer Labs, Server Room", category: "all", floor: "Ground-3rd Floor", contact: "computerlab@lcup.edu.ph" },
-    { id: 5, name: "Business Building", description: "Business Admin, Accountancy, Faculty Rooms", category: "all", floor: "1st-4th Floor", contact: "business@lcup.edu.ph" },
-    { id: 6, name: "Student Affairs Office", description: "Student services, guidance, scholarships", category: "services", floor: "2nd Floor, Main Bldg", contact: "studentaffairs@lcup.edu.ph" },
-    { id: 7, name: "University Library", description: "Books, digital resources, study areas", category: "facilities", floor: "Ground-2nd Floor", contact: "library@lcup.edu.ph" },
-    { id: 8, name: "Finance Office", description: "Cashier, payments, financial aid", category: "admin", floor: "Ground Floor, Admin", contact: "finance@lcup.edu.ph" },
-    { id: 9, name: "Health & Wellness Center", description: "Campus clinic, first aid, health services", category: "support", floor: "Ground Floor", contact: "clinic@lcup.edu.ph" },
-    { id: 10, name: "Cafeteria & Food Court", description: "Student dining, food services, canteen", category: "facilities", floor: "Ground Floor", contact: "N/A" },
-    { id: 11, name: "Gymnasium & Sports Complex", description: "Indoor sports, basketball court, fitness", category: "facilities", floor: "Ground Floor", contact: "sports@lcup.edu.ph" },
-    { id: 12, name: "Campus Security Office", description: "Safety, security, lost and found", category: "support", floor: "Main Gate", contact: "security@lcup.edu.ph" },
-    { id: 13, name: "Chapel / Prayer Room", description: "Campus ministry, religious activities", category: "facilities", floor: "2nd Floor, Main Bldg", contact: "ministry@lcup.edu.ph" },
-    { id: 14, name: "Guidance & Counseling Office", description: "Student counseling, psychological support", category: "services", floor: "3rd Floor, Main Bldg", contact: "guidance@lcup.edu.ph" },
-    { id: 15, name: "Science Laboratories", description: "Chemistry, Physics, Biology labs", category: "all", floor: "Science Building", contact: "science@lcup.edu.ph" }
-];
-
+// Global Variables
+let locations = [];
 let currentFilter = 'all';
-let campusMap; // Global map variable
+let campusMap;
 
 // ==========================
 // Initialize Application
 // ==========================
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     console.log('🎓 CONSOLOCATE System Initialized');
-    console.log(`📍 Loaded ${locations.length} campus locations`);
 
-    showScreen('welcome');
+    // 1. KUNIN ANG DATA SA DATABASE GAMIT ANG API
+    await fetchLocationsFromDB();
+
+    // 2. Setup Sidebar at Events
+    setupSidebarEvents();
     setupKeyboardShortcuts();
     setupScrollBehavior();
 });
 
 // ==========================
+// API / Data Fetching
+// ==========================
+async function fetchLocationsFromDB() {
+    try {
+        console.log("⏳ Fetching data from database...");
+        const response = await fetch('/api/Locations');
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        locations = await response.json();
+        console.log(`✅ Success! Loaded ${locations.length} locations from Database.`);
+    } catch (error) {
+        console.error('❌ Error loading locations:', error);
+        // Fallback alert para alam mong may error
+        console.warn("Using empty data due to API error.");
+    }
+}
+
+// ==========================
 // Screen Navigation System
 // ==========================
 function showScreen(screenName) {
-    // Hide all screens
+    // 1. Close sidebar if open
+    closeMenu();
+
+    // 2. Hide all screens
     document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
 
+    // 3. Define Screen Map
     const screens = {
         'welcome': 'welcomeScreen',
         'dashboard': 'dashboardScreen',
@@ -52,40 +63,83 @@ function showScreen(screenName) {
         'map': 'mapScreen'
     };
 
-    const targetScreen = document.getElementById(screens[screenName]);
+    // 4. Activate Target Screen
+    const targetId = screens[screenName];
+    const targetScreen = document.getElementById(targetId);
+
     if (targetScreen) {
         targetScreen.classList.add('active');
         window.scrollTo(0, 0);
+    } else {
+        console.error(`Screen "${screenName}" not found.`);
+        return;
     }
 
-    // Manage FAB visibility
+    // 5. Manage FAB Visibility
     const fab = document.getElementById('fabButton');
     if (fab) fab.classList.toggle('visible', screenName !== 'welcome');
 
-    // Screen-specific content
-    if (screenName === 'search') renderLocations();
+    // 6. Screen-specific logic
+    if (screenName === 'search') {
+        renderLocations();
+        setTimeout(() => {
+            const searchBox = document.getElementById('locationSearch');
+            if (searchBox) searchBox.focus();
+        }, 100);
+    }
 
     if (screenName === 'map') {
         initCampusMap();
         setTimeout(() => campusMap?.resize(), 200);
     }
-
-    console.log(`📱 Navigated to: ${screenName}`);
 }
 
 // ==========================
-// Render Locations
+// Sidebar & Menu System
+// ==========================
+function toggleMenu() {
+    const menu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('menuOverlay');
+    if (menu && overlay) {
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+    }
+}
+
+function closeMenu() {
+    const menu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('menuOverlay');
+    if (menu) menu.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+}
+
+function setupSidebarEvents() {
+    const overlay = document.getElementById('menuOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+    }
+}
+
+// ==========================
+// Search & Rendering
 // ==========================
 function renderLocations() {
     const container = document.getElementById('locationsList');
-    const searchTerm = document.getElementById('locationSearch').value.toLowerCase();
+    if (!container) return;
+
+    const searchInput = document.getElementById('locationSearch');
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
 
     const filtered = locations.filter(loc => {
-        const matchesCategory = currentFilter === 'all' || loc.category === currentFilter;
-        const matchesSearch =
-            loc.name.toLowerCase().includes(searchTerm) ||
-            loc.description.toLowerCase().includes(searchTerm) ||
-            loc.floor.toLowerCase().includes(searchTerm);
+        // Safe check for null values
+        const cat = loc.category ? loc.category.toLowerCase() : '';
+        const name = loc.name ? loc.name.toLowerCase() : '';
+        const desc = loc.description ? loc.description.toLowerCase() : '';
+        const flr = loc.floor ? loc.floor.toLowerCase() : '';
+
+        const matchesCategory = currentFilter === 'all' || cat === currentFilter.toLowerCase();
+        const matchesSearch = name.includes(searchTerm) || desc.includes(searchTerm) || flr.includes(searchTerm);
+
         return matchesCategory && matchesSearch;
     });
 
@@ -110,9 +164,6 @@ function renderLocations() {
     `).join('');
 }
 
-// ==========================
-// Filter by Category
-// ==========================
 function filterByTab(category, event) {
     currentFilter = category;
     document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
@@ -120,39 +171,29 @@ function filterByTab(category, event) {
     renderLocations();
 }
 
-// ==========================
-// Search / Clear Search
-// ==========================
 function filterLocations() { renderLocations(); }
 
 function clearSearch() {
-    document.getElementById('locationSearch').value = '';
-    renderLocations();
+    const input = document.getElementById('locationSearch');
+    if (input) {
+        input.value = '';
+        input.focus();
+        renderLocations();
+    }
 }
 
-// ==========================
-// Select Location
-// ==========================
 function selectLocation(id) {
     const loc = locations.find(l => l.id === id);
     if (!loc) return;
 
-    const message = `
-📍 ${loc.name}
-
-📋 Description: ${loc.description}
-🏢 Location: ${loc.floor}
-📞 Contact: ${loc.contact}
-
-Would you like to see the LED path navigation?`;
-
-    if (confirm(message)) {
-        alert('🎯 Activating LED path on 3D model...\nFollow the illuminated path on the physical campus model!');
+    if (confirm(`📍 ${loc.name}\n\nShow this on the map?`)) {
+        showScreen('map');
+        // Future: Add logic here to fly to the location on the map
     }
 }
 
 // ==========================
-// Toggle Accordions
+// UI Helpers (Directory, FAQ, About)
 // ==========================
 function toggleCollege(element) {
     const item = element.closest('.college-item');
@@ -166,83 +207,48 @@ function toggleFaq(element) {
     card.classList.toggle('active');
 }
 
-// ==========================
-// Show About Modal
-// ==========================
 function showAbout() {
-    alert(`🎓 La Consolacion University Philippines
-Founded: 1937
-
-"Unitas • Caritas • Veritas"
-
-CONSOLOCATE is our interactive campus navigation system.`);
+    closeMenu();
+    alert("🎓 La Consolacion University Philippines\n\nCONSOLOCATE v1.0\nYour Campus Navigation Assistant.");
 }
 
 // ==========================
-// Map Initialization
+// Mapbox Initialization
 // ==========================
 function initCampusMap() {
     if (campusMap) return;
 
+    // Token from your previous code
     mapboxgl.accessToken = 'pk.eyJ1IjoiYXlvd21paCIsImEiOiJjbWo1eW5yMm4wOWozM2ZwdWp5bGJvbmJ5In0.P2OctDtdjbLsVMVMcVLjrw';
-
-    const lcupBounds = [
-        [120.8115, 14.8521],
-        [120.8145, 14.8545]
-    ];
 
     campusMap = new mapboxgl.Map({
         container: 'campusMap',
         style: 'mapbox://styles/mapbox/streets-v12',
         center: [120.8129, 14.8532],
-        zoom: 20,
-        minZoom: 19,
-        maxZoom: 22,
+        zoom: 19,
         pitch: 0,
-        maxBounds: lcupBounds,
         antialias: true
     });
 
-    campusMap.addControl(new mapboxgl.NavigationControl());
-
-    campusMap.on('load', () => console.log('🏗️ Map loaded within LCUP bounds'));
-
-    // Add markers
-    locations.forEach(loc => {
-        const lng = 120.8120 + (Math.random() * 0.0015);
-        const lat = 14.8525 + (Math.random() * 0.0010);
-
-        new mapboxgl.Marker()
-            .setLngLat([lng, lat])
-            .setPopup(new mapboxgl.Popup({ offset: 25 })
-                .setHTML(`<h4>${loc.name}</h4><p>${loc.description}</p>`))
-            .addTo(campusMap);
-    });
+    campusMap.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 }
 
 // ==========================
-// Keyboard Shortcuts
+// Utilities
 // ==========================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', e => {
-        if (!e.ctrlKey && !e.altKey) {
-            if (e.key.toLowerCase() === 'h') showScreen('welcome');
-            if (e.key.toLowerCase() === 'd') showScreen('dashboard');
-        }
         if (e.key === 'Escape') {
-            const active = document.querySelector('.screen.active');
-            if (active && active.id !== 'welcomeScreen') showScreen('dashboard');
+            const menu = document.getElementById('sideMenu');
+            if (menu && menu.classList.contains('open')) closeMenu();
         }
     });
 }
 
-// ==========================
-// Scroll Behavior
-// ==========================
 function setupScrollBehavior() {
     window.addEventListener('scroll', () => {
         const fab = document.getElementById('fabButton');
-        if (fab?.classList.contains('visible')) {
+        if (fab && fab.classList.contains('visible')) {
             fab.style.opacity = window.scrollY > 200 ? '1' : '0.9';
         }
     });

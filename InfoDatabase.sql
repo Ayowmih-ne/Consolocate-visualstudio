@@ -1,0 +1,16 @@
+﻿INSERT INTO Locations (Name, Description, Category, Floor, Contact) VALUES 
+('Main Administration Building', 'Presidents Office, Board Room, Executive Offices', 'admin', 'All Floors', '(044) 791-0883'),
+('Registrars Office', 'Enrollment, transcripts, academic records', 'admin', 'Ground Floor, Admin Bldg', 'registrar@lcup.edu.ph'),
+('College of Nursing Building', 'Nursing Department, Skills Lab, Faculty Offices', 'all', '1st-3rd Floor', 'nursing@lcup.edu.ph'),
+('IT Building', 'Computer Studies, Computer Labs, Server Room', 'all', 'Ground-3rd Floor', 'computerlab@lcup.edu.ph'),
+('Business Building', 'Business Admin, Accountancy, Faculty Rooms', 'all', '1st-4th Floor', 'business@lcup.edu.ph'),
+('Student Affairs Office', 'Student services, guidance, scholarships', 'services', '2nd Floor, Main Bldg', 'studentaffairs@lcup.edu.ph'),
+('University Library', 'Books, digital resources, study areas', 'facilities', 'Ground-2nd Floor', 'library@lcup.edu.ph'),
+('Finance Office', 'Cashier, payments, financial aid', 'admin', 'Ground Floor, Admin', 'finance@lcup.edu.ph'),
+('Health & Wellness Center', 'Campus clinic, first aid, health services', 'support', 'Ground Floor', 'clinic@lcup.edu.ph'),
+('Cafeteria & Food Court', 'Student dining, food services, canteen', 'facilities', 'Ground Floor', 'N/A'),
+('Gymnasium & Sports Complex', 'Indoor sports, basketball court, fitness', 'facilities', 'Ground Floor', 'sports@lcup.edu.ph'),
+('Campus Security Office', 'Safety, security, lost and found', 'support', 'Main Gate', 'security@lcup.edu.ph'),
+('Chapel / Prayer Room', 'Campus ministry, religious activities', 'facilities', '2nd Floor, Main Bldg', 'ministry@lcup.edu.ph'),
+('Guidance & Counseling Office', 'Student counseling, psychological support', 'services', '3rd Floor, Main Bldg', 'guidance@lcup.edu.ph'),
+('Science Laboratories', 'Chemistry, Physics, Biology labs', 'all', 'Science Building', 'science@lcup.edu.ph');

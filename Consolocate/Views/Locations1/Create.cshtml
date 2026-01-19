@@ -1,0 +1,115 @@
+﻿@model ConsoLocate.Models.Location
+
+@{
+    ViewData["Title"] = "Add New Location";
+    Layout = null; /* Tatanggalin natin ang default layout para malinis tingnan */
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Location - Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-container">
+            <h2 class="header-title">➕ Add New Location</h2>
+            <p class="text-muted text-center">Use this form to add Buildings or Rooms to the map.</p>
+            <hr />
+
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name of Place</label>
+                    <input asp-for="Name" class="form-control" placeholder="e.g., IT Building OR Computer Lab 1" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Category" class="form-label">Category</label>
+                    <select asp-for="Category" class="form-select" required>
+                        <option value="" disabled selected>Select a category...</option>
+                        <option value="building">🏢 Building (Entire Structure)</option>
+                        <option value="admin">💼 Admin Office</option>
+                        <option value="facilities">🚽 Facilities (CR, Canteen, Gym)</option>
+                        <option value="services">🆘 Student Services (Clinic, Guidance)</option>
+                        <option value="all">🎓 Academic Room / Lab</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Floor" class="form-label">Location / Floor</label>
+                    <input asp-for="Floor" class="form-control" placeholder="e.g., Ground Floor, Main Building" required />
+                    <div class="form-text text-primary">
+                        💡 <strong>Tip:</strong> If adding a room, specify which Building it is in.
+                    </div>
+                    <span asp-validation-for="Floor" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="2" placeholder="What can serve students do here?"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Contact" class="form-label">Contact Info (Optional)</label>
+                    <input asp-for="Contact" class="form-control" placeholder="Phone or Email" />
+                    <span asp-validation-for="Contact" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <a asp-action="Index" class="btn btn-secondary me-md-2">Back to List</a>
+                    <input type="submit" value="Save to Database" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

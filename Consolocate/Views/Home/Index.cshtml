@@ -242,6 +242,21 @@
                 </div>
             </div>
         </div>
+    <div id="buildingInfoPanel" class="info-panel">
+        <button class="close-btn" onclick="closeInfoPanel()">✕</button>
+
+        <div class="panel-content">
+            <img id="panelImage" src="" alt="Building Image" class="panel-img">
+            <h2 id="panelTitle">Building Name</h2>
+            <p id="panelDesc" class="panel-desc">Description here...</p>
+
+            <hr>
+
+            <h4> Offices / Facilities:</h4>
+            <ul id="panelList">
+            </ul>
+        </div>
+    </div>
 
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
         <script src="~/js/script.js"></script>

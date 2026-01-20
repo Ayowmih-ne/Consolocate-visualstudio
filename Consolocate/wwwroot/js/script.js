@@ -218,19 +218,143 @@ function showAbout() {
 function initCampusMap() {
     if (campusMap) return;
 
-    // Token from your previous code
     mapboxgl.accessToken = 'pk.eyJ1IjoiYXlvd21paCIsImEiOiJjbWo1eW5yMm4wOWozM2ZwdWp5bGJvbmJ5In0.P2OctDtdjbLsVMVMcVLjrw';
+
+    // 1. DEFINISYON NG KULUNGAN (BOUNDS) - Base sa GeoJSON mo
+    // Dinagdagan ko ng konting space (+/- 0.0005) para may allowance
+    const lcupBounds = [
+        [120.81100, 14.85100], // South-West (Baba-Kaliwa)
+        [120.81550, 14.85500]  // North-East (Taas-Kanan)
+    ];
 
     campusMap = new mapboxgl.Map({
         container: 'campusMap',
         style: 'mapbox://styles/mapbox/streets-v12',
-        center: [120.8129, 14.8532],
-        zoom: 19,
+        center: [120.8129, 14.8532], // Gitna ng LCUP
+        zoom: 18,
         pitch: 0,
-        antialias: true
+        antialias: true,
+
+        // 👇 DITO NATIN I-LOCK ANG MAP 👇
+        maxBounds: lcupBounds, // Bawal lumabas dito
+        minZoom: 17            // Bawal mag-zoom out nang sobra
     });
 
     campusMap.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+    // 👇 DITO TAYO MAGDADAGDAG NG LAYERS PAGKA-LOAD NG MAP 👇
+    campusMap.on('load', () => {
+
+        // 1. ADD SOURCE: MAIN BUILDING
+        campusMap.addSource('main-building-source', {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Polygon',
+                    'coordinates': [
+                        [
+                            // COPY-PASTED COORDINATES FROM YOU
+                            [120.8127945241639, 14.85391026664972],
+                            [120.81275693338233, 14.853572244530937],
+                            [120.81279908062339, 14.853565638230634],
+                            [120.8127865503622, 14.853445623731488],
+                            [120.81274819424101, 14.853449190420477],
+                            [120.81273691238607, 14.853356994699837],
+                            [120.81262306821594, 14.85336789957229],
+                            [120.81264460630206, 14.853568152581943],
+                            [120.8126128119847, 14.853574100687922],
+                            [120.8126281963315, 14.853728751395948],
+                            [120.81265999065062, 14.853726768694813],
+                            [120.81268255435884, 14.853925038673324],
+                            [120.81269486183766, 14.853926030022578],
+                            [120.81269588745965, 14.853939908914683],
+                            [120.812759476096, 14.853935943517143],
+                            [120.81275742485013, 14.853915125179114],
+                            [120.81279434728299, 14.85391115978112]
+                        ]
+                    ]
+                }
+            }
+        });
+
+        // 2. LAYER A: BLUE OUTLINE (BORDER)
+        campusMap.addLayer({
+            'id': 'main-building-outline',
+            'type': 'line',
+            'source': 'main-building-source',
+            'layout': {},
+            'paint': {
+                'line-color': '#0080ff', // Neon Blue
+                'line-width': 3,
+                'line-opacity': 0
+            }
+        });
+
+        // 3. LAYER B: TRANSPARENT BLUE FILL (CLICKABLE AREA)
+        campusMap.addLayer({
+            'id': 'main-building-fill',
+            'type': 'fill',
+            'source': 'main-building-source',
+            'layout': {},
+            'paint': {
+                'fill-color': '#0080ff',
+                'fill-opacity': 0.2 // 20% visible
+            }
+        });
+
+        // 4. CLICK EVENT (OPEN INFO PANEL)
+        campusMap.on('click', 'main-building-fill', (e) => {
+
+            // A. Tawagin ang function para buksan ang panel
+            openInfoPanel({
+                title: "Main Administration Building",
+                description: "This is the heart of the university. It houses the key administrative offices including the President's Office.",
+                image: "/images/main_bldg.jpg", // Siguraduhin may image ka dito, or use placeholder
+                offices: [
+                    "Office of the President",
+                    "Registrar's Office (Ground Floor)",
+                    "Finance / Cashier",
+                    "Human Resources (HR)",
+                    "Board Room"
+                ]
+            });
+            campusMap.setPaintProperty('main-building-outline', 'line-opacity', 1);
+        });
+
+        // UPDATE SA MOUSELEAVE (Para hindi mawala kung na-click na)
+        campusMap.on('mouseleave', 'main-building-fill', () => {
+            campusMap.getCanvas().style.cursor = '';
+
+            // Check muna kung bukas ang panel. Kung sarado, saka lang itago ang outline.
+            const panel = document.getElementById('buildingInfoPanel');
+            if (!panel.classList.contains('active')) {
+                campusMap.setPaintProperty('main-building-outline', 'line-opacity', 0);
+            }
+        });
+        // 5. MOUSE POINTER EFFECTS
+        campusMap.on('mouseenter', 'main-building-fill', () => {
+            campusMap.getCanvas().style.cursor = 'pointer';
+        });
+        campusMap.on('mouseleave', 'main-building-fill', () => {
+            campusMap.getCanvas().style.cursor = '';
+        });
+        campusMap.on('mouseenter', 'main-building-fill', () => {
+            // Gawing "Kamay" ang cursor
+            campusMap.getCanvas().style.cursor = 'pointer';
+
+            // 👇 PALITAWIN ANG OUTLINE (Gawing 1 ang Opacity)
+            campusMap.setPaintProperty('main-building-outline', 'line-opacity', 1);
+        });
+        // 6. MOUSE LEAVE (Hover Out)
+        campusMap.on('mouseleave', 'main-building-fill', () => {
+            // Ibalik sa normal ang cursor
+            campusMap.getCanvas().style.cursor = '';
+
+            // 👇 ITAGO ULIT ANG OUTLINE (Gawing 0 ang Opacity)
+            campusMap.setPaintProperty('main-building-outline', 'line-opacity', 0);
+        });
+
+    });
 }
 
 // ==========================
@@ -252,4 +376,36 @@ function setupScrollBehavior() {
             fab.style.opacity = window.scrollY > 200 ? '1' : '0.9';
         }
     });
+}
+// ==========================
+// INFO PANEL FUNCTIONS
+// ==========================
+function openInfoPanel(data) {
+    const panel = document.getElementById('buildingInfoPanel');
+
+    // 1. Populate Data (Ilagay ang laman)
+    document.getElementById('panelTitle').innerText = data.title;
+    document.getElementById('panelDesc').innerText = data.description;
+
+    // Image Handling (Kung wala kang image, maglalagay ng default)
+    const imgElement = document.getElementById('panelImage');
+    imgElement.src = data.image || 'https://via.placeholder.com/350x180?text=LCUP+Building';
+
+    // Listahan ng Offices
+    const list = document.getElementById('panelList');
+    list.innerHTML = ""; // Clear muna
+    data.offices.forEach(office => {
+        const li = document.createElement('li');
+        li.innerText = office;
+        li.style.marginBottom = "8px"; // Spacing
+        list.appendChild(li);
+    });
+
+    // 2. Ipakita ang Panel (Slide In)
+    panel.classList.add('active');
+}
+
+function closeInfoPanel() {
+    const panel = document.getElementById('buildingInfoPanel');
+    panel.classList.remove('active'); // Slide Out
 }

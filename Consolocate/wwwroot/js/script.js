@@ -90,7 +90,7 @@ function initCampusMap() {
         style: 'mapbox://styles/mapbox/streets-v12',
         center: [120.8129, 14.8532],
         zoom: 18,
-        minZoom: 17,
+        minZoom: 18,
         maxBounds: [
             [120.81100, 14.85100],
             [120.81550, 14.85500]
@@ -531,9 +531,6 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
                 ]
             }
         });

@@ -1112,9 +1112,9 @@ body {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    background-color: #eee; /* Gray placeholder habang loading */
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background-color: #f1f1f1; /* Gray placeholder habang loading */
 }
 
 /* Close Button */

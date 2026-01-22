@@ -106,8 +106,8 @@ function initCampusMap() {
         // ==========================
 
         addBuilding({
-            id: 'main-building',
-            name: 'Main Administration Building',
+            id: 'SA-building',
+            name: 'St. Augustine Administration Building',
             color: '#0080ff',
             coordinates: [
                 [120.8127945241639, 14.85391026664972],
@@ -129,7 +129,7 @@ function initCampusMap() {
                 [120.81279434728299, 14.85391115978112]
             ],
             info: {
-                title: "Main Administration Building",
+                title: "Saint Augustine Administration Building",
                 description: "Heart of the university.",
                 image: "/images/main_bldg.jpg",
                 offices: [
@@ -159,7 +159,7 @@ function initCampusMap() {
                 [120.81307862595372, 14.85422201708323]
             ],
             info: {
-                title: "ETI Building",
+                title: "Barcie International Center",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
@@ -171,8 +171,8 @@ function initCampusMap() {
         });
 
         addBuilding({
-            id: 'stage-building',
-            name: 'Stage',
+            id: 'vmc-open-stage-building',
+            name: 'VMC Open Stage',
             color: '#ff2200',
             coordinates: [
                 [120.81282284373663, 14.853905478151546],
@@ -182,7 +182,7 @@ function initCampusMap() {
                 [120.81282284373663, 14.853905478151546]
             ],
             info: {
-                title: "Stage Building",
+                title: "VMC Open Stage",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
@@ -279,7 +279,7 @@ function initCampusMap() {
         });
 
         addBuilding({
-            id: 'cafe-building',
+            id: 'barcie-cafe-building',
             name: 'Barcie Cafe',
             color: '#ff2200',
             coordinates: [
@@ -332,7 +332,7 @@ function initCampusMap() {
 
         addBuilding({
             id: 'andrada-building',
-            name: 'Mother Theresa Andrada OSA Gymnasium',
+            name: 'Mo. Theresa Andrada OSA Gymnasium',
             color: '#ff2200',
             coordinates: [
                 [120.8131561855543, 14.854303160898624],
@@ -342,13 +342,10 @@ function initCampusMap() {
                 [120.81315942586355, 14.854306292919517]
             ],
             info: {
-                title: "Mother Theresa Andrada OSA Gymnasium",
+                title: "Mo. Theresa Andrada OSA Gymnasium",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
                 ]
             }
         });
@@ -369,9 +366,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "Human Anatomy Laboratory",
                 ]
             }
         });
@@ -394,15 +389,12 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
                 ]
             }
         });
 
         addBuilding({
-            id: 'cafeteria-building',
+            id: 'cafe-monica-building',
             name: 'Cafe Monica Building',
             color: '#ff2200',
             coordinates: [
@@ -434,9 +426,8 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "University Bookstore",
+                    "Cafeteria"
                 ]
             }
         });
@@ -461,9 +452,12 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "CITHM Office",
+                    "CITHM Faculty Room",
+                    "Function Hall",
+                    "Bar Area",
+                    "Hot Kitchen Laboratory",
+                    "Cold Kitchen Laboratory"
                 ]
             }
         });
@@ -878,6 +872,29 @@ function initCampusMap() {
             ],
             info: {
                 title: "St. Agustine Inner Garden",
+                description: "Engineering and Technology Institute.",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'agustino-farm-building',
+            name: 'Agustino Farm',
+            color: '#00FF00',
+            coordinates: [
+                [120.81303091434393, 14.852167162500777],
+                [120.81284905670913, 14.852179403324044],
+                [120.81284885132982, 14.852425155311224],
+                [120.81305002327048, 14.85245132495497],
+                [120.81303412843715, 14.852171330599361]
+            ],
+            info: {
+                title: "Agustino Farm",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [

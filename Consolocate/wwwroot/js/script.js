@@ -656,9 +656,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -801,9 +799,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -824,9 +820,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });

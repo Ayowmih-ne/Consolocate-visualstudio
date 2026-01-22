@@ -279,8 +279,8 @@ function initCampusMap() {
         });
 
         addBuilding({
-            id: 'barcie-cafe-building',
-            name: 'Barcie Cafe',
+            id: 'barcelo-cafe-building',
+            name: 'Barcelo Cafe Malolos',
             color: '#ff2200',
             coordinates: [
                 [120.81229443335621, 14.853903296856586],
@@ -296,7 +296,7 @@ function initCampusMap() {
                 [120.8122960066678, 14.853903296856586]
             ],
             info: {
-                title: "Barcie Cafe",
+                title: "Barcelo Cafe Malolos",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
@@ -308,8 +308,8 @@ function initCampusMap() {
         });
 
         addBuilding({
-            id: 'barcie-office-building',
-            name: 'Barcie Office',
+            id: 'agostino-building',
+            name: 'Agostino - CITHM Laboratory',
             color: '#ff2200',
             coordinates: [
                 [120.81227251965043, 14.853740251442673],
@@ -319,7 +319,7 @@ function initCampusMap() {
                 [120.81227251965043, 14.853740251442673]
             ],
             info: {
-                title: "Barcie Office",
+                title: "Agostino - CITHM Laboratory",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
@@ -480,9 +480,6 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
                 ]
             }
         });
@@ -511,16 +508,14 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "UBMSS Office"
                 ]
             }
         });
 
         addBuilding({
             id: 'chapel-building',
-            name: 'Our Lady of Mt. Carmel Chapel',
+            name: 'Chapel of Our Lady of Consolation',
             color: '#ff2200',
             coordinates: [
                 [120.81295400576028, 14.853081881301861],
@@ -532,7 +527,7 @@ function initCampusMap() {
                 [120.81295400576028, 14.853081346208072]
             ],
             info: {
-                title: "Our Lady of Mt. Caramel Chapel",
+                title: "Chapel of Our Lady of Consolation",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
@@ -545,7 +540,7 @@ function initCampusMap() {
 
         addBuilding({
             id: 'mother-rita-building',
-            name: 'MO.Rita Barcelo Building',
+            name: 'Mo. Rita Barcelo Building',
             color: '#ff2200',
             coordinates: [
                 [120.8135761632119, 14.852711583778557],
@@ -572,7 +567,7 @@ function initCampusMap() {
                 [120.81376858370317, 14.852489343249914]
             ],
             info: {
-                title: "MO. Rita Barcelo Building",
+                title: "Mo. Rita Barcelo Building",
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
@@ -707,9 +702,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "St. Padre Pio Canteen"
                 ]
             }
         });
@@ -745,7 +738,7 @@ function initCampusMap() {
             }
         });
         addBuilding({
-            id: 'sto-grounds-builduing',
+            id: 'sto-grounds-building',
             name: 'Sto. Niño Grounds and Sta. Rita de Casia Student Lounge',
             color: '#ff2200',
             coordinates: [
@@ -883,19 +876,19 @@ function initCampusMap() {
         });
 
         addBuilding({
-            id: 'agustino-farm-building',
-            name: 'Agustino Farm',
+            id: 'carthage-activity-building',
+            name: 'Carthage Student Activity Hub',
             color: '#00FF00',
             coordinates: [
-                [120.81303091434393, 14.852167162500777],
-                [120.81284905670913, 14.852179403324044],
-                [120.81284885132982, 14.852425155311224],
-                [120.81305002327048, 14.85245132495497],
-                [120.81303412843715, 14.852171330599361]
+                [120.81261642212968,14.853135924777504],
+                [120.81258251376772,14.853000726414564],
+                [120.81285095496503,14.852931078740781],
+                [120.81288910187249,14.853063545866803],
+                [120.81261783497695,14.853135924777504]
             ],
             info: {
                 title: "Agustino Farm",
-                description: "Engineering and Technology Institute.",
+                description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
                     "Engineering Labs",
@@ -906,19 +899,276 @@ function initCampusMap() {
         });
 
         addBuilding({
-            id: 'agustino-farm-building',
-            name: 'Agustino Farm',
+            id: 'tagaste-mini-forest-building1',
+            name: 'Tagaste Mini Forest',
             color: '#00FF00',
             coordinates: [
-                [120.81303091434393, 14.852167162500777],
-                [120.81284905670913, 14.852179403324044],
-                [120.81284885132982, 14.852425155311224],
-                [120.81305002327048, 14.85245132495497],
-                [120.81303412843715, 14.852171330599361]
+                [120.81327920069845,14.853066784016036],
+                [120.81320881182808,14.8531808776264],
+                [120.81268179516417,14.853238741694952],
+                [120.81263810804637,14.85314738712475],
+                [120.8132817589738,14.853066180039178],
+                [120.8129366560758,14.853110444805168]
             ],
             info: {
-                title: "Agustino Farm",
-                description: "Engineering and Technology Institute.",
+                title: "Tagaste Mini Forest",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'tagaste-mini-forest-building2',
+            name: 'Tagaste Mini Forest',
+            color: '#00FF00',
+            coordinates: [
+                [120.8125886781176,14.852985357852688],
+                [120.8125936492869,14.85283939547054],
+                [120.8127813160549,14.852785863532361],
+                [120.81279796621976,14.8528401321215],
+                [120.81286365867288,14.852818235416947],
+                [120.81288255071041,14.85290462317738],
+                [120.81258676853133,14.852986518424828]
+            ],
+            info: {
+                title: "Tagaste Mini Forest",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'mary-of-mediatrix-building',
+            name: 'Mary of Mediatrix',
+            color: '#00FF00',
+            coordinates: [
+                [120.81179160500346,14.853112014214489],
+                [120.81154220392858,14.853075375299213],
+                [120.81152109051317,14.85318609925207],
+                [120.8118965148401,14.853251301404939],
+                [120.8119243118507,14.8530886930577],
+                [120.81179836180382,14.853068042658094],
+                [120.81179021189337,14.853112218438582]
+            ],
+            info: {
+                title: "Mary of Mediatrix",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'sto-niño-garden-building',
+            name: 'Sto. Niño Garden',
+            color: '#00FF00',
+            coordinates: [
+                [120.81193010991484,14.85307426173516],
+                [120.8118198155525,14.853051530767601],
+                [120.81185921197391,14.852844542604302],
+                [120.81196532689194,14.852847510092658],
+                [120.81193010991836,14.8530742617329]
+            ],
+            info: {
+                title: "Sto. Niño Garden",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'grotto-lady-lourdes-building',
+            name: 'Grotto of Our Lady of Lourdes',
+            color: '#00FF00',
+            coordinates: [
+                [120.81191810758185,14.85283962927646],
+                [120.8118631499367,14.852832849082489],
+                [120.81186576828236,14.852775940762797],
+                [120.8119253207704,14.852784239246745],
+                [120.81192055396735,14.852838686929672]
+            ],
+            info: {
+                title: "Grotto of Our Lady of Lourdes",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'villa-sta-monica-building',
+            name: 'Villa Santa Monica Building',
+            color: '#00FF00',
+            coordinates: [
+                [120.81184329502565,14.852817426859886],
+                [120.81176888378354,14.852803343196939],
+                [120.81180290905706,14.852590203206887],
+                [120.81171334113543,14.85257373732641],
+                [120.81171820724705,14.852518155249157],
+                [120.81170237357168,14.852510005414132],
+                [120.81171201497824,14.852467380886623],
+                [120.811728245886,14.852470993408701],
+                [120.811734032429,14.852458899756385],
+                [120.81176337086663,14.852461299516833],
+                [120.8117716667748,14.85247454505398],
+                [120.81190847412228,14.852491447572433],
+                [120.81184671633036,14.852818849157458]
+            ],
+            info: {
+                title: "Villa Santa Monica Building",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'grotto-lady-lourdes-building',
+            name: 'Grotto of Our Lady of Lourdes',
+            color: '#00FF00',
+            coordinates: [
+                [120.81191810758185, 14.85283962927646],
+                [120.8118631499367, 14.852832849082489],
+                [120.81186576828236, 14.852775940762797],
+                [120.8119253207704, 14.852784239246745],
+                [120.81192055396735, 14.852838686929672]
+            ],
+            info: {
+                title: "Grotto of Our Lady of Lourdes",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'rotonda-building',
+            name: 'Our Lady of Consolacion Rotonda',
+            color: '#00FF00',
+            coordinates: [
+                [120.81241899984633,14.853300680038284],
+                [120.81240772734328,14.853300144759903],
+                [120.81239656340078,14.853298544079792],
+                [120.81238561553386,14.853295893413394],
+                [120.81237498917655,14.85329221828812],
+                [120.81236478666666,14.853287554097479],
+                [120.81235510626004,14.853281945760253],
+                [120.81234604118437,14.853275447287851],
+                [120.81233767874134,14.853268121264202],
+                [120.81233009946585,14.853260038242995],
+                [120.81232337635046,14.85325127606822],
+                [120.81231757414241,14.853241919124486],
+                [120.81231274872002,14.85323205752436],
+                [120.81230894655468,14.853221786240494],
+                [120.81230620426317,14.85321120419102],
+                [120.8123045482551,14.853200413286897],
+                [120.8123039944786,14.853189517450456],
+                [120.81230454826667,14.853178621614566],
+                [120.8123062042858,14.85316783071207],
+                [120.81230894658756,14.853157248665237],
+                [120.81231274876188,14.853146977384926],
+                [120.8123175741916,14.853137115789135],
+                [120.81232337640515,14.853127758850347],
+                [120.8123300995239,14.853118996680939],
+                [120.81233767880052,14.85311091366531],
+                [120.81234604124242,14.853103587647238],
+                [120.81235510631471,14.853097089180203],
+                [120.81236478671588,14.853091480847919],
+                [120.8123749892184,14.853086816661614],
+                [120.81238561556673,14.853083141539896],
+                [120.81239656342343,14.85308049087614],
+                [120.81240772735484,14.853078890197654],
+                [120.81241899984633,14.853078354919827],
+                [120.81243027233782,14.853078890197654],
+                [120.81244143626922,14.85308049087614],
+                [120.81245238412593,14.853083141539896],
+                [120.81246301047427,14.853086816661614],
+                [120.8124732129768,14.853091480847919],
+                [120.81248289337795,14.853097089180203],
+                [120.81249195845025,14.853103587647238],
+                [120.81250032089216,14.85311091366531],
+                [120.81250790016875,14.853118996680939],
+                [120.8125146232875,14.853127758850347],
+                [120.81252042550105,14.853137115789135],
+                [120.81252525093078,14.853146977384926],
+                [120.81252905310511,14.853157248665237],
+                [120.81253179540685,14.85316783071207],
+                [120.812533451426,14.853178621614566],
+                [120.81253400521406,14.853189517450456],
+                [120.81253345143756,14.853200413286897],
+                [120.81253179542949,14.85321120419102],
+                [120.81252905313798,14.853221786240494],
+                [120.81252525097263,14.85323205752436],
+                [120.81252042555026,14.853241919124486],
+                [120.81251462334218,14.85325127606822],
+                [120.8125079002268,14.853260038242995],
+                [120.8125003209513,14.853268121264202],
+                [120.81249195850829,14.853275447287851],
+                [120.81248289343263,14.853281945760253],
+                [120.81247321302598,14.853287554097479],
+                [120.81246301051613,14.85329221828812],
+                [120.8124523841588,14.853295893413394],
+                [120.81244143629189,14.853298544079792],
+                [120.81243027234939,14.853300144759903],
+                [120.81241899984633,14.853300680038284]
+            ],
+            info: {
+                title: "Our Lady of Consolacion Rotonda",
+                description: "Carthage Student Activity Hub",
+                image: "/images/eti_building.jpg",
+                offices: [
+                    "Engineering Labs",
+                    "IT Offices",
+                    "Lecture Rooms"
+                ]
+            }
+        });
+
+        addBuilding({
+            id: 'fabrication-area-building',
+            name: 'UBMSS Fabrication Area',
+            color: '#00FF00',
+            coordinates: [
+                [120.81200337297793,14.852451490707168],
+                [120.81183421431786,14.852407967225872],
+                [120.81188336236409,14.852227011486107],
+                [120.81204608951504,14.852269241272793],
+                [120.81200375662513,14.852453754498157]
+            ],
+            info: {
+                title: "UBMSS Fabrication Area",
+                description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
                     "Engineering Labs",

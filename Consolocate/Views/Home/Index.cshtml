@@ -74,7 +74,7 @@
                     <p class="tagline">The Official Interactive Campus Navigation<br>of La Consolacion University Philippines</p>
                 
                     <div class="welcome-actions">
-                        <button class="primary-btn" onclick="showScreen('map')">
+                        <button class="primary-btn" onclick="showScreen('dashboard')">
                             <span>Start Navigation</span>
                         </button>
                         <button class="secondary-btn" onclick="showScreen('search')">
@@ -87,22 +87,93 @@
             </div>
         </div>
 
-        <div class="screen" id="mapScreen">
-            <div class="map-header-floating">
-                <button class="menu-btn" onclick="toggleMenu()">
-                    ☰
-                </button>
-                <div class="search-bar-fake" onclick="showScreen('search')">
-                    <span>🔍 Search for buildings, offices...</span>
+    <!-- Dashboard Screen -->
+
+    <div class="screen" id="dashboardScreen">
+        <div class="app-header">
+            <div class="header-left">
+                <div class="logo-mini">
+                    <img src="~/images/lcuplogo.png" alt="ConsoLocate Logo">
+                </div>
+                <div class="header-title">
+                    <h3>ConsoLocate</h3>
+                    <span class="header-subtitle">LCUP Navigation</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <h2 class="page-title">Dashboard</h2>
+            </div>
+            <div class="header-right"></div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-hero">
+                <div class="hero-card" onclick="showScreen('map')">
+                    <div class="hero-icon">🗺️</div>
+                    <div class="hero-content">
+                        <h3>Explore Campus Map</h3>
+                        <p>Navigate through LCUP's interactive 2D digital map with LED path guidance</p>
+                        <button class="hero-btn">Start Exploring →</button>
+                    </div>
                 </div>
             </div>
 
-            <div id="campusMap"></div>
-        
-            <button id="fabButton" class="fab" onclick="showScreen('search')">
-                🔍
-            </button>
+            <div class="services-grid">
+                <div class="service-card" onclick="showScreen('search')">
+                    <div class="service-icon blue"><span>🏢</span></div>
+                    <h4>Find Buildings</h4>
+                    <p>Search for buildings, offices, and classrooms</p>
+                </div>
+
+                <div class="service-card" onclick="showScreen('directory')">
+                    <div class="service-icon purple"><span>🎓</span></div>
+                    <h4>Academic Programs</h4>
+                    <p>Browse colleges, departments, and courses</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon green"><span>📋</span></div>
+                    <h4>Student Services</h4>
+                    <p>Registrar, admissions, and student affairs</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon orange"><span>🏛️</span></div>
+                    <h4>Campus Facilities</h4>
+                    <p>Libraries, laboratories, and recreational areas</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon red"><span>🏥</span></div>
+                    <h4>Support Services</h4>
+                    <p>Health center, counseling, and security</p>
+                </div>
+
+                <div class="service-card" onclick="showScreen('faqs')">
+                    <div class="service-icon teal"><span>❓</span></div>
+                    <h4>Help & FAQs</h4>
+                    <p>Get assistance and find answers</p>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+
+    <div class="screen" id="mapScreen">
+        <div class="map-header-floating">
+            <button class="back-map-btn" onclick="showScreen('dashboard')">←</button>
+
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+            <div class="search-bar-fake" onclick="showScreen('search')">
+                <span>🔍 Search for buildings, offices...</span>
+            </div>
+        </div>
+
+    
+        <div id="campusMap"></div>
+    </div>
 
         <div class="screen" id="searchScreen">
             <div class="app-header">
@@ -191,6 +262,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="screen" id="faqsScreen">
             <div class="app-header">

@@ -1084,7 +1084,7 @@ body {
     right: 0;
     width: 360px;
     height: 100%;
-    background: linear-gradient(to bottom, #4783fe,#94bdd8);
+    background: white;
     border-top-left-radius: 22px;
     border-bottom-left-radius: 22px;
     box-shadow: -6px 0 30px rgba(0,0,0,0.25);
@@ -1122,7 +1122,7 @@ body {
     height: 180px;
     object-fit: cover;
     border-radius: 22px 0 0 0;
-    background: linear-gradient(135deg, #6a7cff, #8b5cf6);
+    background: linear-gradient(135deg, #9aa3e7, #0011ff);
 }
 
 /* MAIN CONTENT CARD */
@@ -1142,7 +1142,7 @@ body {
 
 .panel-desc {
     text-align: center;
-    color: #4f46e5;
+    color: #2563eb;
     font-style: italic;
     margin-bottom: 12px;
 }
@@ -1150,7 +1150,7 @@ body {
 /* QR SECTION */
 .qr-section {
     background: #ecf5ff;
-    border: 2px solid #93c5fd;
+    border: 2px solid #3b82f669;
     border-radius: 16px;
     padding: 36px;
     display: flex;
@@ -1185,9 +1185,9 @@ body {
 .panel-content h4 {
     font-size: 13px;
     letter-spacing: 1px;
-    color: #4338ca;
+    color: #2563eb;
     margin-top: 20px;
-    border-left: 4px solid #6366f1;
+    border-left: 4px solid #3b82f6;
     padding-left: 8px;
 }
 
@@ -1201,8 +1201,9 @@ body {
         background: #f1f5f9;
         padding: 14px;
         border-radius: 14px;
+        box-shadow: -1px 9px 15px -8px rgba(37,99,235,0.49);
         margin: 10px 0;
-        border-left: 5px solid #6366f1;
+        border-left: 5px solid rgb(59, 130, 246);
         font-size: 14px;
     }
 

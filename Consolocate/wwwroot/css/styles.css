@@ -1081,114 +1081,59 @@ body {
 .info-panel {
     position: fixed;
     top: 0;
-    right: -400px; /* Nakatago sa kanan (off-screen) */
-    width: 350px;
+    right: 0;
+    width: 360px;
     height: 100%;
-    background: linear-gradient(to bottom, #2f6df6, #4a86ff);
-    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-    transition: right 0.3s ease-in-out; /* Smooth sliding effect */
-    z-index: 2000; /* Dapat mas mataas sa Map */
+    background: linear-gradient(to bottom, #4783fe,#94bdd8);
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+    box-shadow: -6px 0 30px rgba(0,0,0,0.25);
+    z-index: 3000;
     transform: translateX(100%);
-    padding: 20px;
-    overflow-y: auto; /* Scrollable pag mahaba content */
+    transition: transform 0.35s ease;
+    overflow-y: auto;
     padding-bottom: 40px;
 }
 
-    /* Pag may class na 'active', papasok siya sa screen */
+    /* when JS adds .active */
     .info-panel.active {
-        right: 0;
-
-
-    }
-
-    .info-panel.open {
         transform: translateX(0);
     }
 
+/* close button */
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: white;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 10;
+}
 
-
-/* Image styling */
+/* HEADER IMAGE / GRADIENT AREA */
 .panel-img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    background-color: #f1f1f1; /* Gray placeholder habang loading */
+    border-radius: 22px 0 0 0;
+    background: linear-gradient(135deg, #6a7cff, #8b5cf6);
 }
 
-/* Close Button */
-.close-btn {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    background: white;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-    .close-btn:hover {
-        background: #dc3545;
-        color: white;
-    }
-
-/* Mobile Responsive: Full width sa cellphone */
-@media (max-width: 480px) {
-    .info-panel {
-        width: 100%;
-        right: -100%;
-    }
-}
-
-/* HEADER IMAGE AREA */
-.panel-img {
-    width: 90%;
-    height: 160px;
-    object-fit: cover;
-    margin: 20px auto 10px;
-    border-radius: 16px;
-    display: block;
-    border: 2px solid rgba(255,255,255,0.6);
-}
-
-/* QR SECTION */
-.qr-section {
-    background: white;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.qr-left {
-    font-size: 32px;
-    font-weight: 800;
-    color: #2563eb;
-    line-height: 1;
-}
-
-.qr-right img {
-    width: 90px;
-    height: 90px;
-    border: 2px solid #2563eb;
-    border-radius: 10px;
-}
-
-/* TITLE AREA */
+/* MAIN CONTENT CARD */
 .panel-content {
-    padding: 20px;
-    color: #0033cc;
     background: white;
-    margin: 20px;
-    border-radius: 20px;
+    margin-top: -20px;
+    border-radius: 22px 22px 0 0;
+    padding: 20px;
 }
 
+/* TITLE + DESC */
 #panelTitle {
     font-size: 22px;
     font-weight: 800;
@@ -1197,30 +1142,74 @@ body {
 
 .panel-desc {
     text-align: center;
+    color: #4f46e5;
     font-style: italic;
+    margin-bottom: 12px;
+}
+
+/* QR SECTION */
+.qr-section {
+    background: #ecf5ff;
+    border: 2px solid #93c5fd;
+    border-radius: 16px;
+    padding: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.qr-left {
+    font-size: 22px;
+    font-weight: 900;
     color: #2563eb;
 }
 
-/* SECTION HEADER */
-.panel-content h4 {
-    margin-top: 25px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: #0033cc;
-    border-bottom: 2px solid #0033cc;
-    padding-bottom: 6px;
+    .qr-left small {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+.qr-right img {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 2px solid #2563eb;
 }
 
-/* LIST DESIGN */
+/* OFFICES HEADER */
+.panel-content h4 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #4338ca;
+    margin-top: 20px;
+    border-left: 4px solid #6366f1;
+    padding-left: 8px;
+}
+
+/* OFFICE LIST */
 #panelList {
     list-style: none;
     padding: 0;
 }
 
     #panelList li {
-        background: #eaf2ff;
-        margin: 10px 0;
+        background: #f1f5f9;
         padding: 14px;
         border-radius: 14px;
+        margin: 10px 0;
+        border-left: 5px solid #6366f1;
         font-size: 14px;
     }
+
+/* MOBILE */
+@media (max-width: 480px) {
+    .info-panel {
+        width: 100%;
+        border-radius: 22px 22px 0 0;
+    }
+}

@@ -283,3 +283,12 @@ function setupKeyboardShortcuts() {
 function setupScrollBehavior() {
     window.addEventListener("scroll", () => { });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const screen = params.get("screen");
+
+    if (screen) {
+        showScreen(screen);
+    }
+});

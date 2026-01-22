@@ -1161,3 +1161,8 @@ body {
     height: 100%;
 }
 
+.side-menu,
+.menu-overlay {
+    display: none !important;
+}
+

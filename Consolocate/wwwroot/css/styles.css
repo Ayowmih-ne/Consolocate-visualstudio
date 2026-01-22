@@ -777,10 +777,10 @@ body {
     border: 2px solid transparent;
 }
 
-    .college-item:hover {
-        box-shadow: var(--shadow-md);
-        border-color: var(--primary-blue);
-    }
+.college-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-blue);
+}
 
 .college-badge {
     width: 55px;

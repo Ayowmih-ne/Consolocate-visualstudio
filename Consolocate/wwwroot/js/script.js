@@ -31,7 +31,7 @@ async function fetchLocationsFromDB() {
         if (!response.ok) throw new Error(response.status);
         locations = await response.json();
         console.log(`✅ Loaded ${locations.length} locations`);
-    } catch (err) {
+    } catch (err) {1
         console.warn("⚠ Using empty data (locations)");
         locations = [];
     }
@@ -49,8 +49,17 @@ async function fetchBuildingsFromDB() {
 // ==========================
 // Screen Navigation
 // ==========================
+let lastScreen = "welcome";
+
 function showScreen(screenName) {
     closeMenu();
+
+    // Save current screen before changing
+    const current = document.querySelector(".screen.active");
+    if (current) {
+        lastScreen = current.id.replace("Screen", "");
+    }
+
     document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
 
     const map = {
@@ -71,6 +80,10 @@ function showScreen(screenName) {
         initCampusMap();
         setTimeout(() => campusMap?.resize(), 200);
     }
+}
+
+function goBack() {
+    showScreen(lastScreen);
 }
 
 // ==========================

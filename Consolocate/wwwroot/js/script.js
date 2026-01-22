@@ -133,10 +133,11 @@ function initCampusMap() {
                 description: "Heart of the university.",
                 image: "/images/main_bldg.jpg",
                 offices: [
-                    "Office of the President",
-                    "Registrar",
-                    "Finance",
-                    "HR"
+                    "1st Floor - Registration Office, Finance Office, Human Resource Development Office, and Presidents Office",
+                    "2nd Floor - St. Agustine Library and Institutional Sounds and Lights,",
+                    "3rd Floor - Archives and Memorabilia, Computer Laboratory, and CITE Office",
+                    "4th Floor - Television Broadcast Station and Rapid Broadcastation",
+                    "5th Floor - St. Agustine Audio Visual Room"
                 ]
             }
         });
@@ -163,9 +164,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -186,9 +185,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -215,9 +212,11 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "1st Floor - Gradute Studies Faculty Room, Office of the Vice President for Graduate Studies, Graduate Studies Department, Office of the Vice President for Academic Affairs, and VMC Conference Room",
+                    "2nd Floor - Psychology Laboratory, Pharmacology/Biochemistry Laboratory, and Management Information System,",
+                    "3rd Floor - Microbiology/Parasitology Laboratory, VMC Library / Library of the College of Medicine, and Pathology Laboratory ",
+                    "4th Floor - College of Medicine, College of Allied Medical Science, and College of Medicine Faculty Room ",
+                    "5th Floor - Floor VMC Audio Visual Room and Skills Laboratory"
                 ]
             }
         });
@@ -300,9 +299,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -323,9 +320,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -531,9 +526,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                  
                 ]
             }
         });
@@ -571,8 +564,8 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
+                    "1st Floor - Principals Office, Faculty Room, SAC Office, ,MO. Rita Barcelo Library & Visiual Center, Quality Assurance & Acccrediation Offfice, Student Welfare Services Extension (BED, COLLEGE, & OS), Student Development Services (College), Micro Teaching Laboratory, and Radiologic Technology Laboratory ",
+                    "2nd Floor - Nursing Laboratory, MO. Rita Barcelo Audio-Visual Room, BED Guidance Center, SDS Office (BED K-10), and Computer Laboratory 1, 2, 3 , 4, and 5  ",
                     "Lecture Rooms"
                 ]
             }
@@ -598,9 +591,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -622,9 +613,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -645,9 +634,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+              
                 ]
             }
         });
@@ -731,9 +718,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "2nd Floor - CASE Office and CBEA Office"
                 ]
             }
         });
@@ -753,9 +738,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -776,9 +759,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -799,9 +780,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                  
                 ]
             }
         });
@@ -868,9 +847,7 @@ function initCampusMap() {
                 description: "Engineering and Technology Institute.",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -891,9 +868,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -915,9 +890,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -940,9 +913,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -965,9 +936,8 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    "1st Floor - Parent Lounge/Waiting Area, Marketing and Promotion Office, Admissions Office, Student Affairs Services Office, Research Publication and Linkage Office, and Extension Office  ",
+                    "2nd Floor - Alternative Education Office"
                 ]
             }
         });
@@ -988,9 +958,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+  
                 ]
             }
         });
@@ -1011,9 +979,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -1042,9 +1008,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                   
                 ]
             }
         });
@@ -1148,9 +1112,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });
@@ -1171,9 +1133,7 @@ function initCampusMap() {
                 description: "Carthage Student Activity Hub",
                 image: "/images/eti_building.jpg",
                 offices: [
-                    "Engineering Labs",
-                    "IT Offices",
-                    "Lecture Rooms"
+                    
                 ]
             }
         });

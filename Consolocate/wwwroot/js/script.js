@@ -176,7 +176,7 @@ function addBuilding({ id, name, coordinates, color, info }) {
         source: sourceId,
         paint: {
             "fill-color": color || "#ff2200",
-            "fill-opacity": 0.25,
+            "fill-opacity": 0.6,
         },
     });
 
@@ -187,7 +187,7 @@ function addBuilding({ id, name, coordinates, color, info }) {
         paint: {
             "line-color": color || "#ff2200",
             "line-width": 3,
-            "line-opacity": 0,
+            "line-opacity": 1,
         },
     });
 

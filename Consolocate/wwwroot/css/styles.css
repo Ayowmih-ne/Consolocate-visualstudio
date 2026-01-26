@@ -425,9 +425,15 @@ body {
         box-shadow: 0 12px 48px rgba(26, 77, 143, 0.3);
     }
 
-.hero-icon {
-    font-size: 100px;
-    flex-shrink: 0;
+.navigate-icon {
+    margin-bottom: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+.lcupnavigate {
+    height: 155px;
+    width: 130px;
 }
 
 .hero-content h3 {

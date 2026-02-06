@@ -24,7 +24,7 @@
     info: {
         title:"Saint Augustine Administration Building",
         description:"Heart of the university.",
-        image:"/images/main_bldg.jpg",
+        image:"/images/SAbuilding.jpg",
         offices: [
             "Office of the President",
             "Registrar",

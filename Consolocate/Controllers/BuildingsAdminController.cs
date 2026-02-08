@@ -100,33 +100,47 @@ namespace ConsoLocate.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BuildingAdminVM vm)
         {
-            Console.WriteLine("🔥 CREATE POST HIT");
-
             if (!ModelState.IsValid)
-            {
-                Console.WriteLine("❌ ModelState INVALID");
                 return View(vm);
-            }
 
             var building = new Building
             {
-                Code = string.IsNullOrWhiteSpace(vm.Code) ? Guid.NewGuid().ToString() : vm.Code,
+                Code = string.IsNullOrWhiteSpace(vm.Code)
+                    ? Guid.NewGuid().ToString()
+                    : vm.Code,
+
                 Name = vm.Name,
-                Title = vm.Title,
-                Description = vm.Description,
-                Color = string.IsNullOrWhiteSpace(vm.Color) ? "#cccccc" : vm.Color,
-                ImageUrl = string.IsNullOrWhiteSpace(vm.ImageUrl) ? "/images/default.png" : vm.ImageUrl,
-                QrCodeUrl = string.IsNullOrWhiteSpace(vm.QrCodeUrl) ? "/images/qr/default.png" : vm.QrCodeUrl,
+
+                Title = string.IsNullOrWhiteSpace(vm.Title)
+                    ? ""
+                    : vm.Title,
+
+                Description = string.IsNullOrWhiteSpace(vm.Description)
+                    ? ""
+                    : vm.Description,
+
+                Color = string.IsNullOrWhiteSpace(vm.Color)
+                    ? "#cccccc"
+                    : vm.Color,
+
+                ImageUrl = string.IsNullOrWhiteSpace(vm.ImageUrl)
+                    ? "/images/default.png"
+                    : vm.ImageUrl,
+
+                QrCodeUrl = string.IsNullOrWhiteSpace(vm.QrCodeUrl)
+                    ? "/images/qr/default.png"
+                    : vm.QrCodeUrl,
+
                 IsDeleted = false
             };
 
             _context.Buildings.Add(building);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine("✅ INSERT SUCCESS");
             TempData["Success"] = "Building added successfully.";
             return RedirectToAction(nameof(Index));
         }
+
 
         // =====================
         // EDIT (GET)
@@ -174,27 +188,26 @@ namespace ConsoLocate.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(BuildingAdminVM vm)
         {
-            if (!ModelState.IsValid)
-                return View(vm);
-
             var building = await _context.Buildings.FindAsync(vm.Id);
-            if (building == null)
-                return NotFound();
+            if (building == null) return NotFound();
 
             building.Name = vm.Name;
             building.Title = vm.Title;
-            building.Description = vm.Description;
+            building.Description = string.IsNullOrWhiteSpace(vm.Description)
+            ? building.Description ?? ""
+            : vm.Description;
             building.Color = vm.Color;
 
-            // prevent NULL into NOT NULL columns
-            building.ImageUrl = string.IsNullOrWhiteSpace(vm.ImageUrl) ? building.ImageUrl : vm.ImageUrl;
-            building.QrCodeUrl = string.IsNullOrWhiteSpace(vm.QrCodeUrl) ? building.QrCodeUrl : vm.QrCodeUrl;
+            if (!string.IsNullOrWhiteSpace(vm.ImageUrl))
+                building.ImageUrl = vm.ImageUrl;
+
+            if (!string.IsNullOrWhiteSpace(vm.QrCodeUrl))
+                building.QrCodeUrl = vm.QrCodeUrl;
 
             await _context.SaveChangesAsync();
-
-            TempData["Success"] = "Building updated.";
             return RedirectToAction(nameof(Index));
         }
+
 
         // =====================
         // DELETE (GET) ✅ RESTORED

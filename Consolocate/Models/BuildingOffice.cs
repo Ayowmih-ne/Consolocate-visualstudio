@@ -1,16 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
 
-namespace ConsoLocate.Models
+namespace Consolocate.Models
 {
     public class BuildingOffice
     {
         public int Id { get; set; }
-
         public int BuildingId { get; set; }
+
+        [JsonIgnore] // 🔥 REQUIRED to stop JSON infinite loop
         public Building Building { get; set; } = null!;
 
-        [Required]
-        [MaxLength(200)]
-        public string OfficeName { get; set; } = "";
+        public string? OfficeName { get; set; }
     }
 }

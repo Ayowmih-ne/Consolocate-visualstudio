@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Consolocate.Models.BuildingAdminVM>
+
+@{
+    ViewData["Title"] = "Buildings Admin";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+@if (Context.Session.GetInt32("LastDeletedBuildingId") != null)
+{
+    <a asp-action="UndoDelete" class="btn btn-warning mb-2">
+        ⤺ Undo Last Delete
+    </a>
+}
+
+@if (Context.Request.Query["showDeleted"] == "true")
+{
+    <div class="alert alert-warning">
+        Viewing <strong>deleted buildings</strong>
+        <a asp-action="Index" class="ms-2">Back to active buildings</a>
+    </div>
+}
+
+<h2>Buildings Admin</h2>
+
+<!-- EXIT ADMIN -->
+<div style="margin-bottom:20px;">
+    <a href="/BuildingsAdmin/Back" class="btn btn-danger">
+        ← Exit Admin
+    </a>
+</div>
+
+<hr />
+
+<!-- ACTION BUTTONS -->
+<a asp-action="Create" class="btn btn-success mb-3">
+    + Add Building
+</a>
+
+<a asp-action="Deleted" class="btn btn-warning mb-3">
+    View Deleted Buildings
+</a>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Building Name</th>
+            <th style="width:220px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>
+                    @b.Name
+                    @if (b.IsDeleted)
+                    {
+                        <span class="badge bg-danger ms-2">Deleted</span>
+                    }
+                </td>
+                <td>
+                    @if (b.IsDeleted)
+                    {
+                        <a asp-action="Restore"
+                           asp-route-id="@b.Id"
+                           class="btn btn-sm btn-success">
+                            Restore
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="Edit"
+                           asp-route-id="@b.Id"
+                           class="btn btn-sm btn-primary">
+                            Edit
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@b.Id"
+                           class="btn btn-sm btn-danger ms-2"
+                           onclick="return confirm('Are you sure you want to delete this building?');">
+                            Delete
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

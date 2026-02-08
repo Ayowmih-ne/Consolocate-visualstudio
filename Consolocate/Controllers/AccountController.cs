@@ -1,42 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http; // Need ito para sa Session
+using Microsoft.AspNetCore.Http;
 
 namespace ConsoLocate.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Login Page
-        public IActionResult Login()
+        // GET: Login
+        public IActionResult Login(string returnUrl = "/BuildingsAdmin")
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        // POST: Check Password
+        // POST: Login
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        public IActionResult Login(string username, string password, string returnUrl)
         {
-            // DITO MO BABAGUHIN ANG USERNAME AT PASSWORD
             if (username == "consolocateadmin" && password == "@password123")
             {
-                // Pag tama, bigyan ng VIP Stamp (Session)
                 HttpContext.Session.SetString("IsAdmin", "true");
 
-                // Papuntahin na sa Admin Panel
-                return RedirectToAction("Index", "Locations1");
+                if (!string.IsNullOrEmpty(returnUrl))
+                    return Redirect(returnUrl);
+
+                return RedirectToAction("Index", "BuildingsAdmin");
             }
-            else
-            {
-                // Pag mali, error message
-                ViewBag.Error = "Not Admin!";
-                return View();
-            }
+
+            ViewBag.Error = "Invalid admin credentials";
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
         }
 
         // Logout
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear(); // Burahin ang stamp
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home", new { screen = "welcome" });
         }
     }
 }

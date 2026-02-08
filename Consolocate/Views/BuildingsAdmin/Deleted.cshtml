@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Consolocate.Models.BuildingAdminVM>
+
+@{
+    ViewData["Title"] = "Deleted Buildings";
+}
+
+<h2>Deleted Buildings</h2>
+
+<a asp-action="Index" class="btn btn-secondary mb-3">
+    ← Back to Buildings Admin
+</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Building Name</th>
+            <th style="width:180px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.Name</td>
+                <td>
+                    <a asp-action="Restore"
+                       asp-route-id="@b.Id"
+                       class="btn btn-sm btn-success">
+                        Restore
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

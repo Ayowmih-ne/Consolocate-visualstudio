@@ -1,4 +1,5 @@
-﻿using ConsoLocate.Data;
+﻿
+using ConsoLocate.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,28 +15,14 @@ public class BuildingsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetBuildings()
     {
         var buildings = await _db.Buildings
-            .Include(b => b.Coordinates.OrderBy(c => c.Seq))
+            .Include(b => b.Coordinates)
             .Include(b => b.Offices)
+            .Where(b => !b.IsDeleted)
             .ToListAsync();
 
-        return Ok(buildings.Select(b => new
-        {
-            id = b.Code,
-            name = b.Name,
-            color = b.Color,
-            coordinates = b.Coordinates
-                .OrderBy(c => c.Seq)
-                .Select(c => new[] { c.Lng, c.Lat }),
-            info = new
-            {
-                title = b.Title,
-                description = b.Description,
-                image = b.ImageUrl,
-                offices = b.Offices.Select(o => o.OfficeName)
-            }
-        }));
+        return Ok(buildings);
     }
 }

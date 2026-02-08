@@ -11,43 +11,56 @@ BEGIN TRAN;
 IF EXISTS (SELECT 1 FROM dbo.Buildings WHERE Code = N'SA-building')
 BEGIN
   UPDATE dbo.Buildings
-  SET Name=N'St. Augustine Administration Building', Color=N'#0080ff', Title=N'Saint Augustine Administration Building', Description=N'Heart of the university.', ImageUrl=N'/images/main_bldg.jpg'
+  SET Name=N'St. Augustine Administration Building',
+      Color=N'#000000',
+      Title=N'Saint Augustine Administration Building',
+      Description=N'Heart of the university.',
+      ImageUrl=N'/images/main_bldg.jpg',
+      QrCodeUrl=N'/images/qr/smurfqr.jpg'
   WHERE Code=N'SA-building';
 END
 ELSE
 BEGIN
-  INSERT INTO dbo.Buildings (Code, Name, Color, Title, Description, ImageUrl)
-  VALUES (N'SA-building', N'St. Augustine Administration Building', N'#0080ff', N'Saint Augustine Administration Building', N'Heart of the university.', N'/images/main_bldg.jpg');
+  INSERT INTO dbo.Buildings
+  (Code, Name, Color, Title, Description, ImageUrl, QrCodeUrl)
+  VALUES
+  (N'SA-building',
+   N'St. Augustine Administration Building',
+   N'#000000',
+   N'Saint Augustine Administration Building',
+   N'Heart of the university.',
+   N'/images/main_bldg.jpg',
+   N'/images/qr/qrcodesample.jpg');
 END
 
 DECLARE @bid INT = (SELECT Id FROM dbo.Buildings WHERE Code=N'SA-building');
 DELETE FROM dbo.BuildingCoordinates WHERE BuildingId=@bid;
 INSERT INTO dbo.BuildingCoordinates (BuildingId, Seq, Lng, Lat) VALUES
-(@bid, 1, 120.8127945241639, 14.85391026664972),
-(@bid, 2, 120.81275693338233, 14.853572244530937),
-(@bid, 3, 120.81279908062339, 14.853565638230634),
-(@bid, 4, 120.8127865503622, 14.853445623731488),
-(@bid, 5, 120.81274819424101, 14.853449190420477),
-(@bid, 6, 120.81273691238607, 14.853356994699837),
-(@bid, 7, 120.81262306821594, 14.85336789957229),
-(@bid, 8, 120.81264460630206, 14.853568152581943),
-(@bid, 9, 120.8126128119847, 14.853574100687922),
-(@bid, 10, 120.8126281963315, 14.853728751395948),
-(@bid, 11, 120.81265999065062, 14.853726768694813),
-(@bid, 12, 120.81268255435884, 14.853925038673324),
-(@bid, 13, 120.81269486183766, 14.853926030022578),
-(@bid, 14, 120.81269588745965, 14.853939908914683),
-(@bid, 15, 120.812759476096, 14.853935943517143),
-(@bid, 16, 120.81275742485013, 14.853915125179114),
-(@bid, 17, 120.81279434728299, 14.85391115978112),
-(@bid, 18, 120.8127945241639, 14.85391026664972);
+(@bid,1,120.8127945241639,14.85391026664972),
+(@bid,2,120.81275693338233,14.853572244530937),
+(@bid,3,120.81279908062339,14.853565638230634),
+(@bid,4,120.8127865503622,14.853445623731488),
+(@bid,5,120.81274819424101,14.853449190420477),
+(@bid,6,120.81273691238607,14.853356994699837),
+(@bid,7,120.81262306821594,14.85336789957229),
+(@bid,8,120.81264460630206,14.853568152581943),
+(@bid,9,120.8126128119847,14.853574100687922),
+(@bid,10,120.8126281963315,14.853728751395948),
+(@bid,11,120.81265999065062,14.853726768694813),
+(@bid,12,120.81268255435884,14.853925038673324),
+(@bid,13,120.81269486183766,14.853926030022578),
+(@bid,14,120.81269588745965,14.853939908914683),
+(@bid,15,120.812759476096,14.853935943517143),
+(@bid,16,120.81275742485013,14.853915125179114),
+(@bid,17,120.81279434728299,14.85391115978112),
+(@bid,18,120.8127945241639,14.85391026664972);
 
 DELETE FROM dbo.BuildingOffices WHERE BuildingId=@bid;
 INSERT INTO dbo.BuildingOffices (BuildingId, OfficeName) VALUES
-(@bid, N'Office of the President'),
-(@bid, N'Registrar'),
-(@bid, N'Finance'),
-(@bid, N'HR');
+(@bid,N'Office of the President'),
+(@bid,N'Registrar'),
+(@bid,N'Finance'),
+(@bid,N'HR');
 
 GO
 

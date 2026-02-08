@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>@ViewData["Title"]</title>
 
-        <link rel="stylesheet" href="~/css/styles.css">
+        <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
     
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
     
@@ -74,11 +74,11 @@
                     <p class="tagline">The Official Interactive Campus Navigation<br>of La Consolacion University Philippines</p>
                 
                     <div class="welcome-actions">
-                        <button class="primary-btn" onclick="showScreen('dashboard')">
-                            <span>Start Navigation</span>
+                    <button class="primary-btn" onclick="showScreen('dashboard')">
+                            Start Navigation
                         </button>
-                        <button class="secondary-btn" onclick="showScreen('search')">
-                            <span>Search</span>
+                        <button class="secondary-btn" onclick="location.href='/Account/Login'">
+                            Admin
                         </button>
                     </div>
                 
@@ -91,6 +91,7 @@
 
     <div class="screen" id="dashboardScreen">
         <div class="app-header">
+
             <div class="header-left">
                 <div class="logo-mini">
                     <img src="~/images/lcuplogo.png" alt="ConsoLocate Logo">
@@ -115,7 +116,7 @@
                     <div class="hero-content">
                         <h3>Explore Campus Map</h3>
                         <p>Navigate through LCUP's interactive 2D digital map with LED path guidance</p>
-                        <button class="hero-btn">Start Exploring →</button>
+                        <button class="hero-btn" onclick="showScreen('map')">Start Exploring →</button>
                     </div>
                 </div>
             </div>
@@ -157,13 +158,30 @@
                     <p>Get assistance and find answers</p>
                 </div>
 
-                <a href="/Account/Login" class="service-card" style="text-decoration:none;">
-    <div class="service-icon red"><span>🔐</span></div>
-    <h4>Admin Login</h4>
-    <p>Access system management and controls</p>
-</a>
+                @if (Context.Session.GetString("IsAdmin") == "true")
+                {
+                    <a href="/BuildingsAdmin" class="service-card">
+                        <div class="service-icon red">
+                            <span>🏢</span>
+                        </div>
+                        <h4>Buildings Admin</h4>
+                        <p>Manage buildings, images, QR codes, and map data</p>
+                    </a>
+                    <a href="/Account/Logout" class="service-card">
+                        <div class="service-icon teal">
+                            <span>🚪</span>
+                        </div>
+                        <h4>Logout</h4>
+                        <p>Exit admin session</p>
+                    </a>
+
+                }
+
             </div>
         </div>
+        <button class="floating-home-btn" onclick="showScreen('welcome')">
+            ← Home
+        </button>
     </div>
 
     <!-- Dashboard Screen -->
@@ -322,7 +340,7 @@
             </div>
         </div>
     <div id="buildingInfoPanel" class="info-panel">
-        <button class="close-btn" onclick="closeInfoPanel()">✕</button>
+        <button class="close-btn" onclick="closeInfoPanel()">×</button>
 
         <!-- Header image / gradient -->
         <img id="panelImage" src="" alt="Building Image" class="panel-img">
@@ -337,7 +355,7 @@
                         VIEW</small>
                 </div>
                 <div class="qr-right">
-                    <img src="/images/sample-qr.png" alt="QR Code">
+                    <img id="panelQr" src="/images/sample-qr.png" alt="QR Code">
                 </div>
             </div>
 
@@ -351,7 +369,16 @@
 
         </div>
     </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const params = new URLSearchParams(window.location.search);
+                const screen = params.get("screen");
 
+                if (screen === "welcome") {
+                    showScreen("welcome");
+                }
+            });
+        </script>
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
         <script src="~/js/script.js"></script>
     </body>

@@ -407,6 +407,29 @@ body {
     margin-bottom: 40px;
 }
 
+.floating-home-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f4ed8;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 9999;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .floating-home-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+    }
+
+
 .hero-card {
     background-image: url("/images/students-blue-bg.png");
     background-repeat: no-repeat;
@@ -476,6 +499,7 @@ body {
     border-radius: 16px;
     padding: 30px;
     text-align: center;
+    text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
@@ -536,6 +560,21 @@ body {
     line-height: 1.5;
 }
 
+.service-card,
+.service-card:link,
+.service-card:visited,
+.service-card:hover,
+.service-card:focus,
+.service-card:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+    .service-card h4,
+    .service-card p {
+        text-decoration: none;
+    }
+
 /* ==================== MAP SCREEN (UPDATED) ==================== */
 /* Updated to include floating headers and full screen map */
 #mapScreen {
@@ -560,6 +599,14 @@ body {
     z-index: 10;
     display: flex;
     gap: 10px;
+}
+
+.back-map-btn {
+    width: 50px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
 }
 
 .menu-btn {

@@ -6,7 +6,6 @@
 // Global Variables
 // ==========================
 let locations = [];
-let currentFilter = "all";
 let campusMap;
 
 // ==========================
@@ -16,10 +15,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("🎓 CONSOLOCATE System Initialized");
 
     await fetchLocationsFromDB();
-
     setupSidebarEvents();
     setupKeyboardShortcuts();
-    setupScrollBehavior();
 });
 
 // ==========================
@@ -31,8 +28,7 @@ async function fetchLocationsFromDB() {
         if (!response.ok) throw new Error(response.status);
         locations = await response.json();
         console.log(`✅ Loaded ${locations.length} locations`);
-    } catch (err) {1
-        console.warn("⚠ Using empty data (locations)");
+    } catch {
         locations = [];
     }
 }
@@ -47,20 +43,16 @@ async function fetchBuildingsFromDB() {
 }
 
 // ==========================
-// Screen Navigation
+// MAP INITIALIZATION
 // ==========================
 let lastScreen = "welcome";
 
 function showScreen(screenName) {
-    closeMenu();
-
-    // Save current screen before changing
-    const current = document.querySelector(".screen.active");
-    if (current) {
-        lastScreen = current.id.replace("Screen", "");
-    }
-
-    document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
+    closeInfoPanel();
+    // Hide all screens
+    document.querySelectorAll(".screen").forEach(s =>
+        s.classList.remove("active")
+    );
 
     const map = {
         welcome: "welcomeScreen",
@@ -68,42 +60,29 @@ function showScreen(screenName) {
         search: "searchScreen",
         directory: "directoryScreen",
         faqs: "faqsScreen",
-        map: "mapScreen",
+        map: "mapScreen"
     };
 
-    const target = document.getElementById(map[screenName]);
+    const targetId = map[screenName];
+    if (!targetId) return;
+
+    const target = document.getElementById(targetId);
     if (!target) return;
 
     target.classList.add("active");
 
+    // 🚨 THIS IS THE IMPORTANT PART
     if (screenName === "map") {
         initCampusMap();
         setTimeout(() => campusMap?.resize(), 200);
     }
+
+    lastScreen = screenName;
 }
 
 function goBack() {
     showScreen(lastScreen);
 }
-
-// ==========================
-// Sidebar
-// ==========================
-function toggleMenu() {
-    document.getElementById("sideMenu")?.classList.toggle("open");
-    document.getElementById("menuOverlay")?.classList.toggle("open");
-}
-function closeMenu() {
-    document.getElementById("sideMenu")?.classList.remove("open");
-    document.getElementById("menuOverlay")?.classList.remove("open");
-}
-function setupSidebarEvents() {
-    document.getElementById("menuOverlay")?.addEventListener("click", closeMenu);
-}
-
-// ==========================
-// MAP INITIALIZATION
-// ==========================
 function initCampusMap() {
     if (campusMap) return;
 
@@ -127,7 +106,7 @@ function initCampusMap() {
     campusMap.on("load", async () => {
         try {
             const buildings = await fetchBuildingsFromDB();
-            buildings.forEach((b) => addBuilding(b));
+            buildings.forEach(b => addBuilding(b));
             console.log(`🏫 Loaded ${buildings.length} buildings`);
         } catch (e) {
             console.error(e);
@@ -137,37 +116,46 @@ function initCampusMap() {
 }
 
 // ==========================
-// BUILDING FUNCTION (CORE)
+// BUILDING FUNCTION (FIXED)
 // ==========================
-function addBuilding({ id, name, coordinates, color, info }) {
+function addBuilding(building) {
     if (!campusMap) return;
-    if (!id || !name || !Array.isArray(coordinates) || coordinates.length < 3) return;
 
-    // ✅ Auto-close polygon (Mapbox likes closed rings)
-    const first = coordinates[0];
-    const last = coordinates[coordinates.length - 1];
-    if (first[0] !== last[0] || first[1] !== last[1]) {
-        coordinates = [...coordinates, first];
+    if (!building || !Array.isArray(building.coordinates)) {
+        console.warn("Invalid building:", building);
+        return;
     }
 
-    const sourceId = `${id}-source`;
-    const fillId = `${id}-fill`;
-    const outlineId = `${id}-outline`;
-    const labelId = `${id}-label`;
+    const ring = building.coordinates
+        .filter(c => c.lng != null && c.lat != null)
+        .map(c => [c.lng, c.lat]);
 
-    // ✅ prevent duplicates if called twice
+    if (ring.length < 3) return;
+
+    if (ring[0][0] !== ring.at(-1)[0] || ring[0][1] !== ring.at(-1)[1]) {
+        ring.push(ring[0]);
+    }
+
+    const sourceId = `building-${building.id}-source`;
+    const fillId = `building-${building.id}-fill`;
+    const outlineId = `building-${building.id}-outline`;
+    const labelId = `building-${building.id}-label`;
+
     if (campusMap.getSource(sourceId)) return;
 
     campusMap.addSource(sourceId, {
         type: "geojson",
         data: {
             type: "Feature",
-            properties: { name },
+            properties: {
+                name: building.name || "",
+                title: building.title || ""
+            },
             geometry: {
                 type: "Polygon",
-                coordinates: [coordinates],
-            },
-        },
+                coordinates: [ring]
+            }
+        }
     });
 
     campusMap.addLayer({
@@ -175,9 +163,9 @@ function addBuilding({ id, name, coordinates, color, info }) {
         type: "fill",
         source: sourceId,
         paint: {
-            "fill-color": color || "#ff2200",
-            "fill-opacity": 0.25,
-        },
+            "fill-color": building.color || "#ff2200",
+            "fill-opacity": 0.35
+        }
     });
 
     campusMap.addLayer({
@@ -185,110 +173,107 @@ function addBuilding({ id, name, coordinates, color, info }) {
         type: "line",
         source: sourceId,
         paint: {
-            "line-color": color || "#ff2200",
-            "line-width": 1,
-            "line-opacity": 0.6,
+            "line-color": building.color || "#ff2200",
+            "line-width": 2
+        }
+    });
+
+    campusMap.addLayer(
+        {
+            id: labelId,
+            type: "symbol",
+            source: sourceId,
+            layout: {
+                "text-field": [
+                    "coalesce",
+                    ["get", "title"],
+                    ["get", "name"]
+                ],
+                "text-size": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    17, 10,
+                    19, 16
+                ],
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-anchor": "center"
+            },
+            paint: {
+                "text-color": "#111",
+                "text-halo-color": "#fff",
+                "text-halo-width": 1.5
+            }
         },
-    });
+        outlineId
+    );
 
-    campusMap.addLayer({
-        id: labelId,
-        type: "symbol",
-        source: sourceId,
-        layout: {
-            "text-field": ["get", "name"],
-            "text-size": ["interpolate", ["linear"], ["zoom"], 16, 0, 18, 14],
-            "text-font": ["Open Sans Bold"],
-            "text-offset": [0, 0.6],
-        },
-        paint: {
-            "text-color": "#111",
-            "text-halo-color": "#fff",
-            "text-halo-width": 1.5,
-        },
-    });
-
-    // click/hover events
-    campusMap.on("click", fillId, () => {
-        openInfoPanel(info);
-        campusMap.setPaintProperty(outlineId, "line-opacity", 1);
-    });
-
-    campusMap.on("mouseenter", fillId, () => {
-        campusMap.getCanvas().style.cursor = "pointer";
-        campusMap.setPaintProperty(outlineId, "line-opacity", 1);
-    });
-
-    campusMap.on("mouseleave", fillId, () => {
-        campusMap.getCanvas().style.cursor = "";
-        campusMap.setPaintProperty(outlineId, "line-opacity", 0);
-    });
+    campusMap.on("click", fillId, () => openInfoPanel(building));
+    campusMap.on("mouseenter", fillId, () => campusMap.getCanvas().style.cursor = "pointer");
+    campusMap.on("mouseleave", fillId, () => campusMap.getCanvas().style.cursor = "");
 }
 
 // ==========================
 // INFO PANEL
 // ==========================
-function openInfoPanel(data) {
-    const panel = document.getElementById('buildingInfoPanel');
+function openInfoPanel(building) {
+    console.log("OPEN PANEL BUILDING:", building);
 
-    // TITLE & DESCRIPTION
-    document.getElementById('panelTitle').innerText = data.title || '';
-    document.getElementById('panelDesc').innerText = data.description || '';
+    const panel = document.getElementById("buildingInfoPanel");
+    if (!panel) return;
+
+    // TEXT
+    document.getElementById("panelTitle").innerText =
+        building.title || building.name || "";
+
+    document.getElementById("panelDesc").innerText =
+        building.description || "";
 
     // IMAGE
-    const img = document.getElementById('panelImage');
-    if (data.image) {
-        img.src = data.image;
-        img.style.display = 'block';
-    } else {
-        img.src = '/images/placeholder.jpg'; // optional fallback
-        img.style.display = 'block';
-    }
+    const img = document.getElementById("panelImage");
+    img.src = building.imageUrl || "/images/placeholder.jpg";
+    img.style.display = "block";
 
-    // OFFICES / FACILITIES
-    const list = document.getElementById('panelList');
-    list.innerHTML = '';
+    // QR
+    const qr = document.getElementById("panelQr");
+    qr.src = building.qrCodeUrl || "/images/qr/qrcodesample.jpg";
+    qr.style.display = "block";
 
-    if (data.offices && data.offices.length > 0) {
-        data.offices.forEach(o => {
-            const li = document.createElement('li');
-            li.innerText = o;
+    // OFFICES
+    const list = document.getElementById("panelList");
+    list.innerHTML = "";
+
+    if (Array.isArray(building.offices) && building.offices.length > 0) {
+        building.offices.forEach(o => {
+            const li = document.createElement("li");
+            li.innerText = o.officeName;
             list.appendChild(li);
         });
     } else {
-        const li = document.createElement('li');
-        li.innerText = 'No listed offices';
+        const li = document.createElement("li");
+        li.innerText = "No listed offices";
         list.appendChild(li);
     }
 
-    panel.classList.add('active');
+    panel.classList.add("active");
 }
 
-
-function closeInfoPanel() {
-    document.getElementById("buildingInfoPanel")?.classList.remove("active");
-}
 
 // ==========================
 // Utilities
 // ==========================
 function setupKeyboardShortcuts() {
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            closeMenu();
-            closeInfoPanel();
-        }
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closeInfoPanel();
     });
 }
-function setupScrollBehavior() {
-    window.addEventListener("scroll", () => { });
+
+function setupSidebarEvents() {
+    document.getElementById("menuOverlay")?.addEventListener("click", closeInfoPanel);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const screen = params.get("screen");
 
-    if (screen) {
-        showScreen(screen);
-    }
-});
+// Panel close function
+function closeInfoPanel() {
+    document.getElementById("buildingInfoPanel")?.classList.remove("active");
+}

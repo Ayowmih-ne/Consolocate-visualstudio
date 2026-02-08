@@ -1,4 +1,5 @@
-﻿using ConsoLocate.Models;
+﻿using Consolocate.Models;
+using ConsoLocate.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsoLocate.Data

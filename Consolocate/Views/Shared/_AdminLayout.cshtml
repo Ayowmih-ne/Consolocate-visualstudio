@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - ConsoLocate Admin</title>
+
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <h2>CONSOLOCATE</h2>
+
+            <a asp-controller="BuildingsAdmin" asp-action="Index">
+                🏢 Buildings
+            </a>
+
+            <a asp-controller="Home" asp-action="Index">
+                🌍 Back to Map
+            </a>
+        </aside>
+
+
+        <main class="main-content">
+            @RenderBody()
+        </main>
+    </div>
+
+</body>
+</html>

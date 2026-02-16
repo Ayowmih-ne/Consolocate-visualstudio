@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<Consolocate.Models.BuildingAdminVM>
 
 @{
-    ViewData["Title"] = "Buildings Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Buildings";
 }
 
 @if (TempData["Success"] != null)
@@ -20,84 +21,104 @@
 
 @if (Context.Session.GetInt32("LastDeletedBuildingId") != null)
 {
-    <a asp-action="UndoDelete" class="btn btn-warning mb-2">
-        ⤺ Undo Last Delete
-    </a>
+    <div style="margin-bottom:15px;">
+        <a asp-action="UndoDelete" class="btn btn-secondary btn-sm">
+            ⤺ Undo Last Delete
+        </a>
+    </div>
 }
 
 @if (Context.Request.Query["showDeleted"] == "true")
 {
     <div class="alert alert-warning">
         Viewing <strong>deleted buildings</strong>
-        <a asp-action="Index" class="ms-2">Back to active buildings</a>
+        <a asp-action="Index" style="margin-left:10px;">Back to active buildings</a>
     </div>
 }
 
-<h2>Buildings Admin</h2>
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div>
+        <h2>Buildings</h2>
+        <p style="color: var(--muted); margin-top:6px;">
+            Manage all campus buildings and locations.
+        </p>
+    </div>
 
-<!-- EXIT ADMIN -->
-<div style="margin-bottom:20px;">
     <a href="/BuildingsAdmin/Back" class="btn btn-danger">
-        ← Exit Admin
+        Exit Admin
     </a>
 </div>
 
-<hr />
+<!-- CARD -->
+<div class="card">
 
-<!-- ACTION BUTTONS -->
-<a asp-action="Create" class="btn btn-success mb-3">
-    + Add Building
-</a>
+    <!-- CARD ACTIONS -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <div style="display:flex; gap:12px;">
+            <a asp-action="Create" class="btn btn-primary">
+                + Add Building
+            </a>
 
-<a asp-action="Deleted" class="btn btn-warning mb-3">
-    View Deleted Buildings
-</a>
+            <a asp-action="Deleted" class="btn btn-danger">
+                View Deleted
+            </a>
+        </div>
+    </div>
 
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Building Name</th>
-            <th style="width:220px;">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var b in Model)
-        {
+    <!-- TABLE -->
+    <table>
+        <thead>
             <tr>
-                <td>
-                    @b.Name
-                    @if (b.IsDeleted)
-                    {
-                        <span class="badge bg-danger ms-2">Deleted</span>
-                    }
-                </td>
-                <td>
-                    @if (b.IsDeleted)
-                    {
-                        <a asp-action="Restore"
-                           asp-route-id="@b.Id"
-                           class="btn btn-sm btn-success">
-                            Restore
-                        </a>
-                    }
-                    else
-                    {
-                        <a asp-action="Edit"
-                           asp-route-id="@b.Id"
-                           class="btn btn-sm btn-primary">
-                            Edit
-                        </a>
-
-                        <a asp-action="Delete"
-                           asp-route-id="@b.Id"
-                           class="btn btn-sm btn-danger ms-2"
-                           onclick="return confirm('Are you sure you want to delete this building?');">
-                            Delete
-                        </a>
-                    }
-                </td>
+                <th>Building Name</th>
+                <th style="width:200px; text-align:right;">Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td>
+                        @b.Name
+
+                        @if (b.IsDeleted)
+                        {
+                            <span class="badge-danger" style="margin-left:10px;">
+                                Deleted
+                            </span>
+                        }
+                    </td>
+
+                    <td style="text-align:right;">
+                        @if (b.IsDeleted)
+                        {
+                            <a asp-action="Restore"
+                               asp-route-id="@b.Id"
+                               class="btn btn-primary btn-sm">
+                                Restore
+                            </a>
+                        }
+                        else
+                        {
+                            <div style="display:flex; gap:10px; justify-content:flex-end;">
+                                <a asp-action="Edit"
+                                   asp-route-id="@b.Id"
+                                   class="btn btn-secondary btn-sm">
+                                    Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@b.Id"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Are you sure you want to delete this building?');">
+                                    Delete
+                                </a>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

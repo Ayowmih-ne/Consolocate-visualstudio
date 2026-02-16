@@ -1,5 +1,7 @@
 ﻿@model Consolocate.Models.BuildingAdminVM
-
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 <h2>Delete Building</h2>
 
 <div class="alert alert-danger">
@@ -12,7 +14,7 @@
     <input type="hidden" asp-for="Id" />
     @Html.AntiForgeryToken()
 
-    <button type="submit" class="btn btn-danger">
+    <button type="submit" class="btn btn-danger" style="cursor:pointer;">
         Yes, Delete
     </button>
 

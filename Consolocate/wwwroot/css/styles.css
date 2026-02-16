@@ -122,10 +122,6 @@ body {
     border-bottom: 1px solid #f0f0f0;
 }
 
-    .menu-item:hover {
-        background: #f5f7fa;
-    }
-
 .menu-icon {
     font-size: 20px;
     width: 30px;
@@ -272,11 +268,6 @@ body {
     transition: all 0.3s ease;
 }
 
-    .primary-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 32px rgba(212, 175, 55, 0.5);
-    }
-
 .secondary-btn {
     padding: 18px 40px;
     background: transparent;
@@ -291,11 +282,6 @@ body {
     gap: 10px;
     transition: all 0.3s ease;
 }
-
-    .secondary-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: white;
-    }
 
 /* ==================== APP HEADER ==================== */
 .app-header {
@@ -365,12 +351,6 @@ body {
     transition: all 0.3s ease;
 }
 
-    .header-btn:hover {
-        background: var(--secondary-blue);
-        color: white;
-        transform: scale(1.05);
-    }
-
 .back-button {
     padding: 10px 20px;
     background: var(--light-blue);
@@ -383,10 +363,6 @@ body {
     transition: all 0.3s ease;
 }
 
-    .back-button:hover {
-        background: var(--secondary-blue);
-        color: white;
-    }
 
 /* ==================== DASHBOARD ==================== */
 #dashboardScreen {
@@ -424,11 +400,6 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-    .floating-home-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-    }
-
 
 .hero-card {
     background-image: url("/images/students-blue-bg.png");
@@ -442,11 +413,6 @@ body {
     transition: all 0.3s ease;
     box-shadow: var(--shadow-lg);
 }
-
-    .hero-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 48px rgba(26, 77, 143, 0.3);
-    }
 
 .navigate-icon {
     margin-bottom: 10px;
@@ -484,10 +450,6 @@ body {
     transition: all 0.3s ease;
 }
 
-    .hero-btn:hover {
-        transform: scale(1.05);
-    }
-
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -505,12 +467,6 @@ body {
     box-shadow: var(--shadow-sm);
     border: 2px solid transparent;
 }
-
-    .service-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-md);
-        border-color: var(--primary-blue);
-    }
 
 .service-icon {
     width: 70px;
@@ -563,7 +519,6 @@ body {
 .service-card,
 .service-card:link,
 .service-card:visited,
-.service-card:hover,
 .service-card:focus,
 .service-card:active {
     text-decoration: none;
@@ -693,11 +648,6 @@ body {
     transition: all 0.3s ease;
 }
 
-    .search-clear:hover {
-        background: var(--primary-blue);
-        color: white;
-    }
-
 .filter-section {
     padding: 20px 40px;
     background: white;
@@ -721,11 +671,6 @@ body {
     gap: 8px;
     transition: all 0.3s ease;
 }
-
-    .filter-chip:hover {
-        border-color: var(--primary-blue);
-        color: var(--primary-blue);
-    }
 
     .filter-chip.active {
         background: var(--primary-blue);
@@ -752,12 +697,6 @@ body {
     box-shadow: var(--shadow-sm);
     border: 2px solid transparent;
 }
-
-    .result-card:hover {
-        transform: translateX(8px);
-        box-shadow: var(--shadow-md);
-        border-color: var(--primary-blue);
-    }
 
 .result-badge {
     width: 50px;
@@ -828,11 +767,6 @@ body {
     transition: all 0.3s ease;
     box-shadow: var(--shadow-sm);
     border: 2px solid transparent;
-}
-
-.college-item:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-blue);
 }
 
 .college-badge {
@@ -972,12 +906,6 @@ body {
     color: var(--text-dark);
 }
 
-    .quick-action-card:hover {
-        border-color: var(--primary-blue);
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-md);
-    }
-
 .qa-icon {
     font-size: 40px;
 }
@@ -1003,10 +931,6 @@ body {
     transition: all 0.3s ease;
     border: 2px solid transparent;
 }
-
-    .faq-card:hover {
-        border-color: var(--primary-blue);
-    }
 
 .faq-header {
     padding: 20px 24px;
@@ -1074,11 +998,6 @@ body {
 
     .fab.visible {
         display: flex;
-    }
-
-    .fab:hover {
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 12px 32px rgba(26, 77, 143, 0.4);
     }
 
 /* ==================== RESPONSIVE DESIGN ==================== */
